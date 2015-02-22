@@ -50,14 +50,16 @@ canvas{ border:1px solid #000000; margin:auto; max-width: 100%;  padding-left: 0
     margin-right: auto; display: block;
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+table, th, td { border: 1px solid black; border-collapse: collapse;
 }
 
-th, td {
-    padding: 5px;
-    text-align: left;
+th{ background-color:#216197;  color:white;
+}
+
+td{   background-color:white;
+}
+
+th, td {padding: 5px;text-align: left;
 }
 
 button{ padding:5px 15px; background:#216197; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px; color:white; margin-top:3px;

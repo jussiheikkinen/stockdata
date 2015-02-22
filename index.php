@@ -16,7 +16,7 @@
 
 <h1 style="margin-left:7%; height: 1vh; line-height: 2vh; font-size: 4vh;">NASDAQ / NYSE </h1>
 <content>
-	<article>
+	<article id= "salkut">
 		<canvas id="myCanvas" width="600" height="300">
 		</canvas>
 
@@ -56,13 +56,13 @@
 		<strong>Syötä esim AMD, TWTR, GOOG, AAPL, NOK, </strong>
 	</article>
 
-	<aside>
+	<article id='kayttaja' style="min-height:23.7%;">
 	<?php
 	if (isset($_GET['haku']))
 	$taulu->tulosta_tiedot();
 	?>
 	</aside>
-</content>
+</artivle>
 
 <script>
 <!-- Piirrä koordinaatti   -->

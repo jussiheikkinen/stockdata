@@ -18,13 +18,14 @@
   <button type="submit" name="submit" style='width:15em;'>register</button><br><br>
 
 <?php
-require_once ("db-init.php");
+require_once ("/var/www/db-init.php");
 // Lisää tarkistukset kenttiin kun kerkiät
 if (isset($_POST['submit'])){
 $nimi = $_POST['enimi'];
 $snimi = $_POST['snimi'];
 $tunnus = $_POST['tunnus'];
 $pass = crypt($_POST['salasana']);
+
 // let the salt be automatically generated näköjään $6$ eli SHA-512
 // https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/
 $stmt = $db->prepare("INSERT INTO kayttaja (kayttajaID, hash, enimi, snimi) VALUES( ?, ?, ?, ?)");

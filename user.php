@@ -22,6 +22,8 @@ require_once 'Osake.class.php';
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
+        var obj = ('<?php echo $piirakka; ?>');
+        console.info(obj);
         var data = google.visualization.arrayToDataTable([
           ['Stock', 'Value'],
           ['EB1V', 5345],
@@ -30,7 +32,6 @@ require_once 'Osake.class.php';
           ['NOK', 4355],
           ['SAA1V', 2000]
         ]);
-
         var options = {
           pieHole: 0.35,
         };
@@ -99,11 +100,22 @@ $salkku->tulostaSalkku();
 </article>
 
 <article id='kayttaja'>
-  //data pie charttiin
   <?php
-  $taulu = $oletusSalkku->chart();
-  print_r ($taulu);
+  //data pie charttiin
+  $taulu = array();
+  $paskataulu = $oletusSalkku->chart();
+  //loop kunnes index on yhtä pienempi kuin alkioiden määrä
+  for ($i=3; $i<count($paskataulu); $i++){  // poistetaan 1,2,3 taulun alusta koska ?mySQL?
+  $taulu[] = $paskataulu[$i];
+}
+//Lisätään taulun alkuun google chartin vaatimat määrittelyt multidimensional array niin array(array())
+$taulu = array( array('Stock', 'Value')) + $taulu;
+//print_r ($taulu);
+//helvetti koko ilta mennyt tähän ja ei tule mitään
+  $piirakka = json_encode($taulu);
+  print_r ($piirakka);
   ?>
+
 </article>
 
 </content>

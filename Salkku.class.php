@@ -26,7 +26,7 @@ public function tallennaSalkku(){
 }
 
 public function tulostaSalkku(){
-require ("db-init.php");
+require ("/var/www/db-init.php");
 $stmt = $db->query('SELECT * FROM salkku');
 echo '<h3>' .  $this->salkkuID .'<h3>';
 echo '<table><tr><th>stock</th><th>average</th><th>amount</th><th>value</th><th>winning</th></tr>';
@@ -43,7 +43,7 @@ NAPPI;
 
 ///MIKÄ VITTU TÄSSÄ MÄTTÄÄÄ?????? joopa joo eli require ONCE == ONCE
 public function chart(){
-require ("db-init.php");
+require ("/var/www/db-init.php");
 $stmt = $db->prepare("SELECT * FROM salkku WHERE salkkuID = :id");
 $stmt->bindValue(':id', $this->salkkuID);
 $stmt->execute();
