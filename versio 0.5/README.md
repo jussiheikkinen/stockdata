@@ -1,0 +1,2 @@
+# stockdata
+Financial web application
