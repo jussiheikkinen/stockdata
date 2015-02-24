@@ -118,7 +118,6 @@ var vasen = 1;
 var j = 1;//taulukon indeksi loopissa
 var array = JSON.parse( '<?php echo $history;?>' ); // Convert JSON String to JavaScript Object
 for ( i = 1; i < array.length; i++) {
-
 //Jos päiviä yli 85 niin ohuemmat palkit
 	if ( array.length < 90){
 		leveys = 3;

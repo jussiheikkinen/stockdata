@@ -16,50 +16,6 @@ require_once 'Osake.class.php';
 <link rel="shortcut icon" href="icon.ico">
 <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="tyylit.css">
-<!--https://developers.google.com/chart/interactive/docs/gallery/piechart  -->
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var obj = ('<?php echo $piirakka; ?>');
-        console.info(obj);
-        var data = google.visualization.arrayToDataTable([
-          ['Stock', 'Value'],
-          ['EB1V', 5345],
-          ['AAPL',  4333],
-          ['HPQ',  6746],
-          ['NOK', 4355],
-          ['SAA1V', 2000]
-        ]);
-        var options = {
-          pieHole: 0.35,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
-
-function loadXMLDoc(){
-var xmlhttp;
-if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("uusi").innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.open("GET","newstock.php",true);
-xmlhttp.send();
-}
-
-
-
-    </script>
-
 </head>
 
 <body>
@@ -71,18 +27,22 @@ xmlhttp.send();
 <form action='<?php echo $_SERVER['PHP_SELF']?>' method='get'>
 <button type="submit" name="logout" >logout</button>
 <button type="submit" name="uusi" >uusi</button>
+<button type="submit" name='deleteUser'>Remove user</button>
 </form>
 
-<?php
-if (isset($_GET['logout'])){
-include 'logout.php';
-}
+<strong>
+Käyttäjä:<?php echo ' '.$_SESSION['userName']?><br><br>
+<strong>
 
-echo '<strong>';
-echo 'Käyttäjä:<br><br>';
-echo 'Salkut:<br><br>';
-echo '<strong>';
-echo '<button type="button" onclick="muutaTietoja()">Muuta tietoja</button> ';
+<?php
+//LOGOUT
+if (isset($_GET['logout'])){include 'logout.php';}
+//REMOVE USER
+if(isset($_GET['deleteUser'])){
+require_once ('User.class.php');
+$kayttaja = new kayttaja;
+$kayttaja->deleteUser($_SESSION['userName']);
+}
 ?>
 </article>
 
@@ -98,12 +58,43 @@ lisaaOsake($oletusSalkku->salkkuID);
 </article>
 
 <article id='salkut'>
-<div id="donutchart" style="width: 50%;"></div>
+<div id="donutchart" style="max-width: 55%; float:left;"></div>
+<div style="width: 40%; float:right;">
+<?php $taulu = ($oletusSalkku->laskeArvo($_SESSION['userName']));
+echo 'Portfolio value: ' . array_sum($taulu) . '$';?>
+</div>
 </article>
 
+<article id='kayttaja'>
+<?php //data pie charttiin
+  $taulu = array();
+  $taulu = $oletusSalkku->chart();
+//Lisätään taulun alkuun google chartin vaatimat määrittelyt multidimensional array niin array(array())
+  $taulu = array( array('Stock', 'Value')) + $taulu;
+//PHP hakee numerot string muodossa, mutta piirakka haluaa numerista dataa, joten JSON_NUMERIC_CHECK kääntää ne
+  $piirakka = json_encode($taulu, JSON_NUMERIC_CHECK);
+?>
+  <!--https://developers.google.com/chart/interactive/docs/gallery/piechart  -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+      <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var obj = JSON.parse('<?php echo $piirakka; ?>'); //Tyyppimuunnos JSON to js array
+          console.info(obj);
+          var data = google.visualization.arrayToDataTable(obj);
+          var options = {
+            pieHole: 0.35,
+          };
+          var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+          chart.draw(data, options);
+        }
+</script>
+</article>
+<!--
 <article id='salkut'>
 <?php
-
+/* // Toisen salkun lisäys joka ei toimi toivotulla tavalla(ei saa lisäys valikkoa includetettua)
 if (isset($_GET['uusi'])){
 echo <<<UUSI
   <div>
@@ -114,37 +105,16 @@ echo <<<UUSI
   </div>
 UUSI;
 }
-
 if (isset($_GET['ready'])){
 $salkku = new Salkku;
 $salkku->uusiSalkku($_GET['salkkuID']);
 $salkku->tulostaSalkku($_SESSION['userName']);
-}
-
+include ('newstock.php');
+//lisaaOsake($salkku->salkkuID);
+}*/
 ?>
 </article>
-
-<article id='kayttaja'>
-  <?php
-  //data pie charttiin
-  $taulu = array();
-  $paskataulu = $oletusSalkku->chart();
-  //loop kunnes index on yhtä pienempi kuin alkioiden määrä
-  for ($i=3; $i<count($paskataulu); $i++){  // poistetaan 1,2,3 taulun alusta koska ?mySQL?
-  $taulu[] = $paskataulu[$i];
-}
-//Lisätään taulun alkuun google chartin vaatimat määrittelyt multidimensional array niin array(array())
-$taulu = array( array('Stock', 'Value')) + $taulu;
-//print_r ($taulu);
-//helvetti koko ilta mennyt tähän ja ei tule mitään
-  $piirakka = json_encode($taulu);
-  print_r ($piirakka);
-  ?>
-
-</article>
-
+-->
 </content>
-
 </body>
-
 </html>

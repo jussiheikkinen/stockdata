@@ -1,41 +1,39 @@
-﻿
-<?php
-include ('user.php');
+﻿<?php
 
 Class Kayttaja{
 	private $nimi;
-	private $snimi; //sukunimi
-	private $nick;
+	private $snimi;
+	private $kayttaja;
 	private $salasana;
 
 function __construct() {
 $this->nimi = 'Harri';
 $this->snimi = 'Häviäjä';
-$this->nick = 'tuulipuku';
+$this->kayttaja = 'tuulipuku';
 $this->salasana = 'salasana';
 }
-	
+
 function __destruct() {
 $this->nimi = NULL;
 $this->snimi = NULL;
-$this->nick = NULL;
-$this->salasana = NULL;  
+$this->kayttaja = NULL;
+$this->salasana = NULL;
 }
 
-public function uusiKayttaja(){
-	if (isset($_POST['name']))
-		$this->nimi = $_POST['name'];
-	
-	if (isset($_POST['lastname']))
-		$this->snimi = $_POST['lastname'];
+public function deleteUser($value){
+	require ("/var/www/db-init.php");
 
-	if (isset($_POST['nick']))
-		$this->nick = $_POST['nick'];
+	$stmt = $db->prepare('DELETE FROM salkku WHERE kayttajaID = :id');
+	$stmt->bindValue(':id', $value);
+	$stmt->execute();
 
-	if (isset($_POST['password']))
-		$this->salasana = $_POST['password'];
+	$stmt = $db->prepare('DELETE FROM kayttaja WHERE kayttajaID = :id');
+	$stmt->bindValue(':id', $value);
+	$stmt->execute();
 
-	
-	//tallenna tiedot mySQL
+	echo '<META HTTP-EQUIV="Refresh" Content="1; URL=kirjaudu.php">';
 }
+
+}
+
 ?>

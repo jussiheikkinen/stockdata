@@ -7,7 +7,7 @@ Class Salkku{
 function __construct() {
 $this->salkkuID = 'Portfolio';
 $this->tuotto = 0;
-$this->osakkeet = array(1,2,3);
+$this->osakkeet = array();
 }
 
 function __destruct() {
@@ -20,16 +20,21 @@ public function uusiSalkku($id){
 $this->salkkuID = $id;
 }
 
-public function tallennaSalkku(){
-//tähän tallennustietokantaan mySQL
-
+public function laskeArvo($kayttaja){
+	$array = array();
+	require ("/var/www/db-init.php");
+	$stmt = $db->prepare('SELECT * FROM salkku where kayttajaID = ? AND salkkuID = ?');
+	$stmt->execute(array($kayttaja, $this->salkkuID));
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+	$array[] = $row['arvo'];
+	}
+	return $array;
 }
 
 public function tulostaSalkku($kayttaja){
 require ("/var/www/db-init.php");
 $stmt = $db->prepare('SELECT * FROM salkku where kayttajaID = ? AND salkkuID = ? ');
 $stmt->execute(array($kayttaja, $this->salkkuID));
-
 echo '<h3>' .  $this->salkkuID .'<h3>';
 echo '<table id="omasalkku"><tr><th>stock</th><th>average</th><th>amount</th><th>value</th><th>winning</th></tr>';
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -45,10 +50,10 @@ NAPPI;
 //<button type='submit' name='uusiOsake'>add</button>
 ///MIKÄ VITTU TÄSSÄ MÄTTÄÄÄ?????? joopa joo eli require ONCE == ONCE
 public function chart(){
+$kayttaja = $_SESSION['userName'];
 require ("/var/www/db-init.php");
-$stmt = $db->prepare("SELECT * FROM salkku WHERE salkkuID = :id");
-$stmt->bindValue(':id', $this->salkkuID);
-$stmt->execute();
+$stmt = $db->prepare('SELECT * FROM salkku where kayttajaID = ? AND salkkuID = ?');
+$stmt->execute(array($kayttaja, $this->salkkuID));
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 $this->osakkeet[] = array($row['osake'], $row['arvo']);
 }
