@@ -70,9 +70,9 @@ echo 'Portfolio value: ' . array_sum($taulu) . '$';?>
   $taulu = array();
   $taulu = $oletusSalkku->chart();
 //Lisätään taulun alkuun google chartin vaatimat määrittelyt multidimensional array niin array(array())
-  $taulu = array( array('Stock', 'Value')) + $taulu;
+ array_unshift($taulu, array('Stock', 'Value'));
 //PHP hakee numerot string muodossa, mutta piirakka haluaa numerista dataa, joten JSON_NUMERIC_CHECK kääntää ne
-  $piirakka = json_encode($taulu, JSON_NUMERIC_CHECK);
+  print_r ($piirakka = json_encode($taulu, JSON_NUMERIC_CHECK));
 ?>
   <!--https://developers.google.com/chart/interactive/docs/gallery/piechart  -->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>

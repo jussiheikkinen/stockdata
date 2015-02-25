@@ -30,7 +30,15 @@ public function laskeArvo($kayttaja){
 	}
 	return $array;
 }
-
+/*
+public function poistaOsake(){
+	require ("/var/www/db-init.php");
+	$stmt = $db->prepare('DELETE FROM salkku WHERE kayttajaID = :id AND osake = :osake');
+	$stmt->bindValue(':id', $value);
+	stmt->bindValue(':osake', $osake);
+	$stmt->execute();
+}
+*/
 public function tulostaSalkku($kayttaja){
 require ("/var/www/db-init.php");
 $stmt = $db->prepare('SELECT * FROM salkku where kayttajaID = ? AND salkkuID = ? ');

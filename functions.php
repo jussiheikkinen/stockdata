@@ -43,5 +43,20 @@ function haeData($symbol, &$error_message) {
 		return $arr;
 	}
 
-	
-	?>
+
+function haeHinta($symbol){
+$key = 'a0';//a0 = ask l1=last price
+$static = '&e=.csv';
+$url = "http://finance.yahoo.com/d/quotes.csv?s=" . $symbol . "&f=" . $key . $static;
+$fp = @fopen($url, "r");
+
+if ( $fp == FALSE ) { // If the URL can't be opened
+	return -1; // ERROR
+}
+
+$array = @fgetcsv($fp , 1000);
+@fclose($fp);
+return $array;
+}
+
+?>

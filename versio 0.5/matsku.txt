@@ -1,4 +1,5 @@
-/*
+﻿hgjhg
+ghjhgj/*
 var eka = 10;
 var toka = 300 - <?php hae(); ?>;
 var kolmas = 15;
