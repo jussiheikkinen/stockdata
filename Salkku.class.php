@@ -54,14 +54,16 @@ INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ?;
 ');
 $stmt->execute(array($kayttaja));
 echo '<h3>' .  $this->salkkuID .'<h3>';
-echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>avg-price</th><th>amount</th><th>profit</th><th>total</th><th>currency</th></tr>';
+echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>avg-price</th><th>amount</th><th>price</th><th>total</th><th>profit</th><th>currency</th></tr>';
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 $kurssi = haeHinta($row['OsakeNimi']);
 $hinta = ($row['TapahtumaLkm'] * $row['TapahtumaHinta']);
-$tuotto = (($kurssi[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
+$tuotto = $hinta + (($kurssi[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
+$prosentti = ($hinta/100*$tuotto);
 
 echo <<<SALKKU
-<tr><td>{$row['TapahtumaAika']}</td><td>{$row['OsakeNimi']}</td><td>{$row['TapahtumaHinta']}</td><td>{$row['TapahtumaLkm']}</td><td>$hinta</td><td>$tuotto</td><td>{$row['TiedotValuutta']}</td></tr>
+<tr><td>{$row['TapahtumaAika']}</td><td>{$row['OsakeNimi']}</td><td>{$row['TapahtumaHinta']}</td>
+<td>{$row['TapahtumaLkm']}</td><td>$kurssi</td><td>$tuotto</td><td>$prosentti</td><td>{$row['TiedotValuutta']}</td></tr>
 SALKKU;
 }
 echo <<<NAPPI
