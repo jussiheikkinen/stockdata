@@ -7,12 +7,12 @@ if(isset($_POST['submit'])) {
 $username = $_POST["userName"];
 $password = $_POST["password"];
 // varmistetaan että mysql injektio ei ole mahdollista
-$stmt = $db->prepare("SELECT hash FROM kayttaja WHERE kayttajaID = :username");
+$stmt = $db->prepare("SELECT KayttajaSalasana FROM Kayttaja WHERE kayttajaNimi = :username");
 $stmt->bindValue(':username', $username);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_OBJ);
 //jos käyttäjää luodessa kryptattu salasana on sama kuin keskenään kryptattu hash ja syötetty salasana, niin salasana on oikein
-if ($user->hash == crypt($password, $user->hash)) {
+if ($user->KayttajaSalasana == crypt($password, $user->KayttajaSalasana)) {
   //Jos oikein tallennetaan kirjautuminen sessiomuuttujiin ja ohjataan käyttäjä sivulle
   $_SESSION['app1_islogged'] = true;
   $_SESSION['userName'] = $_POST['userName'];

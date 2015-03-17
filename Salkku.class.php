@@ -41,8 +41,15 @@ public function poistaOsake(){
 */
 public function tulostaSalkku($kayttaja){
 require ("/var/www/db-init.php");
-$stmt = $db->prepare('SELECT * FROM salkku where kayttajaID = ? AND salkkuID = ? ');
-$stmt->execute(array($kayttaja, $this->salkkuID));
+
+$stmt = $db->prepare('SELECT Tapahtuma.TapahtumaAika,Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi,Tiedot.TiedotValuutta
+FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeID
+INNER JOIN Tiedot ON Osake.OsakeTiedot = Tiedot.TiedotId
+INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
+INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ?;
+');
+
+$stmt->execute(array($kayttaja)); //oli vielä $this->salkkuID
 echo '<h3>' .  $this->salkkuID .'<h3>';
 echo '<table id="omasalkku"><tr><th>stock</th><th>average</th><th>amount</th><th>value</th><th>winning</th></tr>';
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

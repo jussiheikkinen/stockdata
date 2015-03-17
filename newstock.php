@@ -19,16 +19,30 @@ if(isset($_GET['addstock'])){
 
   $a = $salkku;
   $b =  $_SESSION['userName'];
-  $c = strtoupper($_GET['stock']); //Osakkeet aina isoilla kirjaimilla
-  $d = $_GET['avg'];
-  $e = $_GET['amount'];
-  $hinta = haeHinta($c);
-  $g = (($hinta[0] - $d) * $e);//tuotto
-  $f = ($d * $e + $g);//osakkeen nimellisarvo
+  $tunnus = strtoupper($_GET['stock']); //Osakkeet aina isoilla kirjaimilla
+  $ostohinta = $_GET['avg'];
+  $lkm = $_GET['amount'];
+  //$hinta = haeHinta($c);
+  //$g = (($hinta[0] - $d) * $e);//tuotto
+  //$f = ($d * $e + $g);//osakkeen nimellisarvo
   //Tähän haku function.php ja sieltä b2 arvo osakkeelle ja laskut + tallennus $g
+  $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
+  $stmt->execute(array($b));
+  $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
 
-  $stmt = $db->prepare("INSERT INTO salkku (salkkuID, kayttajaID, osake, keskihinta, maara, arvo, tuotto) VALUES( :f1,:f2,:f3,:f4,:f5,:f6,:f7)");
-  $stmt->execute(array(':f1' => $a, ':f2' => $b, ':f3' => $c, ':f4' => $d, ':f5' => $e, ':f6' => $f, ':f7' => $g));
+  $stmt = $db->prepare("SELECT TiedotId FROM Tiedot WHERE TiedotId =?");
+  $stmt->execute(array(1));
+  $tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
+
+  $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, ?)");
+  $stmt->execute(array($tunnus, $tiedotid->TiedotId));
+
+  $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
+  $stmt->execute(array($tunnus));
+  $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
+
+  $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
+  $stmt->execute(array(':f1' => $lkm, ':f2' => $ostohinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 
   if ($affected_rows = $stmt->rowCount()){
      echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
