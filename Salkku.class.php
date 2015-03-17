@@ -58,12 +58,12 @@ echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>avg-price</th><th>
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 $kurssi = haeHinta($row['OsakeNimi']);
 $hinta = ($row['TapahtumaLkm'] * $row['TapahtumaHinta']);
-$tuotto = $hinta + (($kurssi[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
-$prosentti = ($hinta/100*$tuotto);
+$arvo = $hinta + (($kurssi[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
+$prosentti = ($arvo/$hinta)*100;
 
 echo <<<SALKKU
 <tr><td>{$row['TapahtumaAika']}</td><td>{$row['OsakeNimi']}</td><td>{$row['TapahtumaHinta']}</td>
-<td>{$row['TapahtumaLkm']}</td><td>$kurssi</td><td>$tuotto</td><td>$prosentti</td><td>{$row['TiedotValuutta']}</td></tr>
+<td>{$row['TapahtumaLkm']}</td><td>$kurssi[0]</td><td>$arvo</td><td>$prosentti</td><td>{$row['TiedotValuutta']}</td></tr>
 SALKKU;
 }
 echo <<<NAPPI
