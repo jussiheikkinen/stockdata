@@ -1,0 +1,85 @@
+html{ background-color: white; height:100%; width: 100%;
+}
+
+body { font-family: 'Ubuntu', sans-serif; width: 70%; margin:0; padding:0; margin-left:auto; margin-right:auto;  background-color: white; height:150%;
+}
+
+header{ background-color: #444444; width:100%; color: white; margin:auto; display:inline-flex; flex-wrap: nowrap; height: 6vh; line-height: 2vh; font-size: 2vh;
+}
+
+header ul{margin-top: auto; margin-bottom:auto; padding-top: 1%; padding-bottom: 1%;
+}
+
+ul li { display: inline; margin:auto;
+}
+
+#nav{width:50%; text-align:center;
+}
+
+#nav li{ padding:2%; font-size: 1.5em;
+}
+
+#nav li a{ text-decoration:none; color:#FFFFFF;
+}
+
+#login{ width:50%; text-align:center; white-space: nowrap;
+}
+
+#login li{ padding: 1%;
+}
+
+content { width: 100%; margin-left:auto; margin-right:auto; float:left;
+}
+
+article { width:100%; margin-left:auto; margin-right:auto; padding-top: 2%;
+}
+
+#myForm{ max-width:100%; wrap:nowrap; margin-left:auto; margin-right:auto; text-align:center;
+}
+
+aside {width:40%; float:right; margin-top: 2%;
+}
+
+#tiedot{ width:80%; margin-left:auto; margin-right:auto;
+}
+
+article p{ background-color: #EEEEEE;
+}
+
+canvas{ border:1px solid #000000; margin:auto; max-width: 100%;  padding-left: 0; padding-right: 0; margin-left: auto;
+    margin-right: auto; display: block;
+}
+
+table, th, td { border: 1px solid black; border-collapse: collapse;
+}
+
+th{ background-color:#216197;  color:white;
+}
+
+td{   background-color:white;
+}
+
+th, td {padding: 5px;text-align: left;
+}
+
+button{ padding:5px 15px; background:#216197; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px; color:white; margin-top:3px;
+}
+
+input[type="text"], textarea, input[type="date"], select, input[type="password"] {-moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; background: #FFF;
+border: 1px solid #999; font-size: 13px; padding: 4px;
+}
+
+#login{padding:5%;  margin-left:auto; margin-right:auto; background: rgba(255, 255, 255, 0.5); width:25%;
+}
+
+#kayttaja{padding: 3%; width:20%; margin:0%; margin-top:1%; background-color: #EEEEEE; float:left;
+}
+
+#salkut{ color:black; padding: 2%; width:69%; margin-left:0%; margin-top:1%; background-color: #EEEEEE; float:right;
+}
+
+#omasalkku{max-width:50%; float:left;
+}
+
+#lisaysform{ border: 0px solid black; border-collapse: collapse; width:45%; float: right;
+}
