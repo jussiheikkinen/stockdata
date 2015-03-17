@@ -33,7 +33,7 @@ $this->alusta($this->taulu1);
 }
 
 public function alusta($taulu){
-$this->taulu = $taulu;
+$this->taulu1 = $taulu;
 $this->yritysid = $taulu[58];//
 $this->osto = $taulu[5];// 5
 $this->myynti = $taulu[4]; // 4

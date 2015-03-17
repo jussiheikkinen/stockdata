@@ -45,7 +45,7 @@ function haeData($symbol, &$error_message) {
 
 
 function haeHinta($symbol){
-$key = 'a0';//a0 = ask l1=last price
+$key = 'a';//a0 = ask l1=last price
 $static = '&e=.csv';
 $url = "http://finance.yahoo.com/d/quotes.csv?s=" . $symbol . "&f=" . $key . $static;
 $fp = @fopen($url, "r");

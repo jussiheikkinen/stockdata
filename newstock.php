@@ -15,17 +15,13 @@ NEW;
 function lisaaOsake($salkku){
 if(isset($_GET['addstock'])){
   require ("/var/www/db-init.php");
-  include ('functions.php');
 
   $a = $salkku;
   $b =  $_SESSION['userName'];
   $tunnus = strtoupper($_GET['stock']); //Osakkeet aina isoilla kirjaimilla
   $ostohinta = $_GET['avg'];
   $lkm = $_GET['amount'];
-  //$hinta = haeHinta($c);
-  //$g = (($hinta[0] - $d) * $e);//tuotto
-  //$f = ($d * $e + $g);//osakkeen nimellisarvo
-  //Tähän haku function.php ja sieltä b2 arvo osakkeelle ja laskut + tallennus $g
+
   $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
   $stmt->execute(array($b));
   $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);

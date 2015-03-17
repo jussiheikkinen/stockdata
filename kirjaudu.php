@@ -1,8 +1,7 @@
-﻿<?php
+<?php
 session_start();
 //mysql kirjautumistiedot
 require_once ("/var/www/db-init.php");
-
 if(isset($_POST['submit'])) {
 $username = $_POST["userName"];
 $password = $_POST["password"];
