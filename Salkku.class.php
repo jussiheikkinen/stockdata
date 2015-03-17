@@ -56,12 +56,12 @@ $stmt->execute(array($kayttaja));
 echo '<h3>' .  $this->salkkuID .'<h3>';
 echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>avg-price</th><th>amount</th><th>profit</th><th>total</th><th>currency</th></tr>';
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-$tuotto = haeHinta($row['OsakeNimi']);
+$kurssi = haeHinta($row['OsakeNimi']);
 $hinta = ($row['TapahtumaLkm'] * $row['TapahtumaHinta']);
-//$tuotto = (($hinta[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
+$tuotto = (($kurssi[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
 
 echo <<<SALKKU
-<tr><td>{$row['TapahtumaAika']}</td><td>{$row['OsakeNimi']}</td><td>{$row['TapahtumaHinta']}</td><td>{$row['TapahtumaLkm']}</td><td>$hinta</td><td>$tuotto[0]</td><td>{$row['TiedotValuutta']}</td></tr>
+<tr><td>{$row['TapahtumaAika']}</td><td>{$row['OsakeNimi']}</td><td>{$row['TapahtumaHinta']}</td><td>{$row['TapahtumaLkm']}</td><td>$hinta</td><td>$tuotto</td><td>{$row['TiedotValuutta']}</td></tr>
 SALKKU;
 }
 echo <<<NAPPI
