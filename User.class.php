@@ -23,7 +23,7 @@ $this->salasana = NULL;
 public function deleteUser($value){
 	require ("/var/www/db-init.php");
 
-	$stmt = $db->prepare('DELETE FROM Kayttaja WHERE kayttajaId = :id');
+	$stmt = $db->prepare('DELETE FROM Kayttaja WHERE KayttajaTunnus = :id');
 	$stmt->bindValue(':id', $value);
 	$stmt->execute();
 
