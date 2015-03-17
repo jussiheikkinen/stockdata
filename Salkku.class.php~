@@ -61,7 +61,7 @@ $hinta = ($row['TapahtumaLkm'] * $row['TapahtumaHinta']);
 //$tuotto = (($hinta[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
 
 echo <<<SALKKU
-<tr><td>{$row['TapahtumaAika']}</td><td>{$row['OsakeNimi']}</td><td>{$row['TapahtumaHinta']}</td><td>{$row['TapahtumaLkm']}</td><td>$hinta</td><td>$tuotto[0]</td><td>{$row['TiedotValuutta']}</td></tr>
+<tr><td>{$row['TapahtumaAika']}</td><td>{$row['TapahtumaLkm']}</td><td>{$row['TapahtumaHinta']}</td><td>{$row['OsakeNimi']}</td><td>{$row['TiedotValuutta']}</td><td>$hinta</td><td>$tuotto[0]</td></tr>
 SALKKU;
 }
 echo <<<NAPPI
