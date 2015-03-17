@@ -59,7 +59,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 $kurssi = haeHinta($row['OsakeNimi']);
 $hinta = ($row['TapahtumaLkm'] * $row['TapahtumaHinta']);
 $arvo = $hinta + (($kurssi[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
-$prosentti = ($arvo/$hinta)*100;
+$prosentti = round(($arvo/$hinta)*100, 1, PHP_ROUND_HALF_UP);//pyöristys
 
 echo <<<SALKKU
 <tr><td>{$row['TapahtumaAika']}</td><td>{$row['OsakeNimi']}</td><td>{$row['TapahtumaHinta']}</td>
