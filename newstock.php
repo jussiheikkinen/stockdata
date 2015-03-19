@@ -8,6 +8,7 @@ echo <<<NEW
 </table>
 <button type="submit" name='addstock'>Buy</button>
 </form>
+
 <form method='get' action='' id='myyntiform'>
 <table>
 <tr><td>Stock name</td><td><input type="text" name="stock1" required></tr></td>
@@ -63,15 +64,11 @@ function lisaaOsake($salkku){
 
     $lkm = ($osake->TapahtumaLkm - $_GET['amount1'];
 
-    $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm) VALUES( :f1");
-    $stmt->execute(array(':f1' => $lkm));
-
-    /*if ($lkm <= 0){
+    if ($lkm <= 0){
     $stmt = $db->prepare("DELETE FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
     INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
     WHERE KayttajaNimi = ? AND OsakeNimi = ?");
-  }*/
-
+    }
     }
 
 ?>
