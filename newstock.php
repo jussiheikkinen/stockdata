@@ -1,18 +1,20 @@
 <?php
 echo <<<NEW
 <form method='get' action='' id='lisaysform'>
+Buy
 <table>
-<tr><td>Stock name</td><td><input type="text" name="stock" required></tr></td>
+<tr><td>Stock</td><td><input type="text" name="stock" required></tr></td>
 <tr><td>Avg/pcs</td><td><input type="number" name="avg" required></tr></td>
-<tr><td>Amount(pcs)</td><td><input type="number" name="amount" required></tr></td>
+<tr><td>Amount</td><td><input type="number" name="amount" required></tr></td>
 </table>
 <button type="submit" name='addstock'>add</button>
 </form>
 
 <form method='get' action='' id='myyntiform'>
+Sell
 <table>
-<tr><td>Stock name</td><td><input type="text" name="stock1" required></tr></td>
-<tr><td>Amount(pcs)</td><td><input type="number" name="amount1" required></tr></td>
+<tr><td>Stock</td><td><input type="text" name="stock1" required></tr></td>
+<tr><td>Amount</td><td><input type="number" name="amount1" required></tr></td>
 </table>
 <button type="submit" name='sellstock'>Sell</button>
 </form>
