@@ -20,7 +20,6 @@ NEW;
 
 //Osakkeen lisääminen salkkuun
 function lisaaOsake($salkku){
-if(isset($_GET['addstock'])){
   require ("/var/www/db-init.php");
 
   $a = $salkku;
@@ -50,7 +49,7 @@ if(isset($_GET['addstock'])){
      echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
   } else {
   exit();
-  }}}
+  }}
 
   function myyOsake($val){
     require ("/var/www/db-init.php");

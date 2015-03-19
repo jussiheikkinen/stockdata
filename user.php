@@ -52,7 +52,9 @@ $oletusSalkku->tulostaSalkku($_SESSION['userName']);
 
 //UUDEN OSAKKEEN LiSÄYS
 include ('newstock.php');
+if(isset($_GET['addstock'])){
 lisaaOsake($oletusSalkku->salkkuID);
+}
 ?>
 </article>
 
