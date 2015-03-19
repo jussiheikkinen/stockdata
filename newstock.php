@@ -53,14 +53,14 @@ function lisaaOsake($salkku){
   exit();
   }}
 
-  function myyOsake($val){
+  function myyOsake(){
     require ("/var/www/db-init.php");
-/*
+
     $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi
     FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
     INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
     WHERE KayttajaNimi = ? AND OsakeNimi = ?");
-    $stmt->execute(array($_SESSION['userName'] ,$val));
+    $stmt->execute(array($_SESSION['userName'] ,$_GET['stock1']));
     $osake = $stmt->fetch(PDO::FETCH_OBJ);
 
     $lkm = ($osake->TapahtumaLkm - $_GET['amount1'];
@@ -68,12 +68,11 @@ function lisaaOsake($salkku){
     $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm) VALUES( :f1)");
     $stmt->execute(array(':f1' => $lkm));
 
-    if ($lkm <= 0){
-    $stmt = $db->prepare("DELETE FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
-    INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
-    WHERE KayttajaNimi = ? AND OsakeNimi = ?");
-    }
-*/
+    //if ($lkm <= 0){
+    //$stmt = $db->prepare("DELETE FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
+    //INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
+    //WHERE KayttajaNimi = ? AND OsakeNimi = ?");
+    //}
   }
 
 ?>

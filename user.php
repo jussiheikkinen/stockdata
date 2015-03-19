@@ -40,7 +40,7 @@ lisaaOsake($oletusSalkku->salkkuID);
 }
 
 if(isset($_GET['sellstock'])){
-myyOsake(12);
+myyOsake();
 }
 
 //LOGOUT
