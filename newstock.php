@@ -53,10 +53,12 @@ function lisaaOsake($salkku){
   }}
 
   function myyOsake($val){
-    $value = $val;
-    //  require ("/var/www/db-init.php");
-echo "kukkuu";
-
+    require ("/var/www/db-init.php");
+    $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi
+    FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeID
+    INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
+    WHERE KayttajaNimi = ? AND OsakeNimi = ?");
+    $stmt->execute(array($_SESSION['userName'] ,$val));
 
   }
 
