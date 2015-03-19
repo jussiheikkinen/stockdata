@@ -65,7 +65,7 @@ th, td {padding: 5px;text-align: left;
 button{ padding:5px 15px; background:#216197; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px; color:white; margin-top:3px;
 }
 
-input[type="text"], textarea, input[type="date"], select, input[type="password"] {-moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; background: #FFF;
+input {-moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; background: #FFF;
 border: 1px solid #999; font-size: 13px; padding: 4px;
 }
 
