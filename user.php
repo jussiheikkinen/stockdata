@@ -32,7 +32,7 @@ require_once 'Osake.class.php';
 Käyttäjä:<?php echo ' '.$_SESSION['userName']?><br><br>
 <strong>
 
-<?php
+<<?php
 //LOGOUT
 if (isset($_GET['logout'])){include 'logout.php';}
 //REMOVE USER
@@ -42,22 +42,16 @@ $kayttaja = new kayttaja;
 $kayttaja->deleteUser($_SESSION['userName']);
 }
 ?>
+<p>poo</p>
 </article>
 
 <article id='salkut'>
 <?php
 $oletusSalkku = new Salkku();
 $oletusSalkku->tulostaSalkku($_SESSION['userName']);
-
 //UUDEN OSAKKEEN LiSÄYS
 include ('newstock.php');
-if(isset($_GET['addstock'])){
 lisaaOsake($oletusSalkku->salkkuID);
-}
-if(isset($_GET['sellstock'])){
-$val = $_GET['stock1'];
-myyOsake($val);
-}
 ?>
 </article>
 
