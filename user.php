@@ -43,13 +43,6 @@ require_once ('User.class.php');
 $kayttaja = new kayttaja;
 $kayttaja->deleteUser($_SESSION['userName']);
 }
-?>
-</article>
-
-<article id='salkut'>
-<?php
-$oletusSalkku = new Salkku();
-$oletusSalkku->tulostaSalkku($_SESSION['userName']);
 
 //UUDEN OSAKKEEN LiSÄYS
 include ('newstock.php');
@@ -62,6 +55,25 @@ if(isset($_GET['sellstock'])){
 $val = $_GET['stock1'];
 myyOsake($val);
 }
+?>
+</article>
+
+<article id='salkut'>
+<?php
+$oletusSalkku = new Salkku();
+$oletusSalkku->tulostaSalkku($_SESSION['userName']);
+/*
+//UUDEN OSAKKEEN LiSÄYS
+include ('newstock.php');
+
+if(isset($_GET['addstock'])){
+lisaaOsake($oletusSalkku->salkkuID);
+}
+
+if(isset($_GET['sellstock'])){
+$val = $_GET['stock1'];
+myyOsake($val);
+}*/
 ?>
 </article>
 
