@@ -1,6 +1,5 @@
 <?php
 echo <<<NEW
-<p>Buy stocks</p>
 <form method='get' action='' id='lisaysform'>
 <table>
 <tr><td>Stock name</td><td><input type="text" name="stock" required></tr></td>
@@ -9,8 +8,6 @@ echo <<<NEW
 </table>
 <button type="submit" name='addstock'>Buy</button>
 </form>
-
-<p>Sell Stocks</p>
 <form method='get' action='' id='myyntiform'>
 <table>
 <tr><td>Stock name</td><td><input type="text" name="stock1" required></tr></td>
