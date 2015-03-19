@@ -29,10 +29,10 @@ require_once 'Osake.class.php';
 </form>
 
 <strong>
-Käyttäjä:<?php echo ' '.$_SESSION['userName']?><br><br>
+User:<?php echo ' '.$_SESSION['userName']?><br><br>
 <strong>
 
-<<?php
+<?php
 //LOGOUT
 if (isset($_GET['logout'])){include 'logout.php';}
 //REMOVE USER
@@ -49,6 +49,7 @@ $kayttaja->deleteUser($_SESSION['userName']);
 <?php
 $oletusSalkku = new Salkku();
 $oletusSalkku->tulostaSalkku($_SESSION['userName']);
+
 //UUDEN OSAKKEEN LiSÄYS
 include ('newstock.php');
 lisaaOsake($oletusSalkku->salkkuID);
