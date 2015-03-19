@@ -39,6 +39,10 @@ if(isset($_GET['addstock'])){
 lisaaOsake($oletusSalkku->salkkuID);
 }
 
+if(isset($_GET['sellstock'])){
+myyOsake(12);
+}
+
 //LOGOUT
 if (isset($_GET['logout'])){include 'logout.php';}
 //REMOVE USER
