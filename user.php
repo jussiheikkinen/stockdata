@@ -59,8 +59,8 @@ lisaaOsake($oletusSalkku->salkkuID);
 }
 
 if(isset($_GET['sellstock'])){
-  $val = $_GET['stock1'];
-  function myyOsake($val);
+$val = $_GET['stock1'];
+myyOsake($val);
 }
 ?>
 </article>
