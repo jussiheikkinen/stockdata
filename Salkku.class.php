@@ -1,15 +1,18 @@
 <?php
 Class Salkku{
 	public $salkkuID;
+	private $tuotto;
 	private $osakkeet = array(); //array
 
 function __construct() {
 $this->salkkuID = 'Portfolio';
+$this->tuotto = 0;
 $this->osakkeet = array();
 }
 
 function __destruct() {
 $this->salkkuID = NULL;
+$this->tuotto = NULL;
 $this->osakkeet = NULL;
 }
 
