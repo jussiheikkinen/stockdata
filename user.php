@@ -1,10 +1,8 @@
-﻿<?php
+<?php
 session_start();
-
 if (!isset($_SESSION['app1_islogged']) || $_SESSION['app1_islogged'] !== true) {
 header('Location:' . dirname($_SERVER['PHP_SELF']) . '/' . 'kirjaudu.php');
 exit;}
-
 require_once 'Salkku.class.php';
 require_once 'Osake.class.php';
 ?>
@@ -43,6 +41,15 @@ require_once ('User.class.php');
 $kayttaja = new kayttaja;
 $kayttaja->deleteUser($_SESSION['userName']);
 }
+//UUDEN OSAKKEEN LiSÄYS
+include ('newstock.php');
+if(isset($_GET['addstock'])){
+lisaaOsake($oletusSalkku->salkkuID);
+}
+if(isset($_GET['sellstock'])){
+$val = $_GET['stock1'];
+myyOsake($val);
+}
 ?>
 </article>
 
@@ -50,15 +57,16 @@ $kayttaja->deleteUser($_SESSION['userName']);
 <?php
 $oletusSalkku = new Salkku();
 $oletusSalkku->tulostaSalkku($_SESSION['userName']);
+/*
 //UUDEN OSAKKEEN LiSÄYS
 include ('newstock.php');
 if(isset($_GET['addstock'])){
-  lisaaOsake($oletusSalkku->salkkuID);
-  }
-if(isset($_GET['sellstock'])){
-  $val = $_GET['stock1'];
-  function myyOsake($val);
+lisaaOsake($oletusSalkku->salkkuID);
 }
+if(isset($_GET['sellstock'])){
+$val = $_GET['stock1'];
+myyOsake($val);
+}*/
 ?>
 </article>
 
