@@ -33,6 +33,12 @@ User:<?php echo ' '.$_SESSION['userName']?><br><br>
 <strong>
 
 <?php
+//UUDEN OSAKKEEN LiSÄYS
+include ('newstock.php');
+if(isset($_GET['addstock'])){
+lisaaOsake($oletusSalkku->salkkuID);
+}
+
 //LOGOUT
 if (isset($_GET['logout'])){include 'logout.php';}
 //REMOVE USER
@@ -49,12 +55,6 @@ $kayttaja->deleteUser($_SESSION['userName']);
 <?php
 $oletusSalkku = new Salkku();
 $oletusSalkku->tulostaSalkku($_SESSION['userName']);
-
-//UUDEN OSAKKEEN LiSÄYS
-include ('newstock.php');
-if(isset($_GET['addstock'])){
-lisaaOsake($oletusSalkku->salkkuID);
-}
 ?>
 </article>
 
