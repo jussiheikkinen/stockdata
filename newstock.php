@@ -67,7 +67,16 @@ function lisaaOsake($salkku){
 
     $lkm = ($osake->TapahtumaLkm - $_GET['amount1']);
 
-    $stmt = $db->query("INSERT INTO Tapahtuma (TapahtumaLkm) VALUES( $lkm )");
+    $stmt = $db->query("UPDATE Tapahtuma SET TapahtumaLkm = $lkm FROM Tapahtuma
+    INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
+  	INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
+  	INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = $_SESSION['userName']
+    AND OsakeNimi =  $_GET['stock1']");
+
+    if ($affected_rows = $stmt->rowCount()){
+       echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
+    } else {
+    exit();
   }
 
 ?>

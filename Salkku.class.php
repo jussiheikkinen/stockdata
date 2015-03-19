@@ -21,7 +21,7 @@ $this->salkkuID = $id;
 public function laskeArvo($kayttaja){
 	$array = array();
 	require ("/var/www/db-init.php");
-	$stmt = $db->prepare('SELECT (Tapahtuma.TapahtumaLkm * Tapahtuma.TapahtumaHinta) AS Arvo, Osake.OsakeNimi FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeID
+	$stmt = $db->prepare('SELECT (Tapahtuma.TapahtumaLkm * Tapahtuma.TapahtumaHinta) AS Arvo, Osake.OsakeNimi FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
 	INNER JOIN Tiedot ON Osake.OsakeTiedot = Tiedot.TiedotId
 	INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
 	INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ?;');
@@ -44,7 +44,7 @@ require ("/var/www/db-init.php");
 include ('functions.php');
 
 $stmt = $db->prepare('SELECT Tapahtuma.TapahtumaAika,Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi,Tiedot.TiedotValuutta
-FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeID
+FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
 INNER JOIN Tiedot ON Osake.OsakeTiedot = Tiedot.TiedotId
 INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
 INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ?;
