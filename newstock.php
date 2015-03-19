@@ -8,6 +8,14 @@ echo <<<NEW
 </table>
 <button type="submit" name='addstock'>add</button>
 </form>
+
+<form method='get' action='' id='myyntiform'>
+<table>
+<tr><td>Stock name</td><td><input type="text" name="stock1" required></tr></td>
+<tr><td>Amount(pcs)</td><td><input type="number" name="amount1" required></tr></td>
+</table>
+<button type="submit" name='sellstock'>Sell</button>
+</form>
 NEW;
 //<tr><td>Value</td><td><input type="text" name="value"></tr></td>
 //<tr><td>Profit</td><td><input type="text" name="profit"></tr></td>
@@ -65,7 +73,7 @@ if(isset($_GET['addstock'])){
     INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
     WHERE KayttajaNimi = ? AND OsakeNimi = ?");
     }
-    
+
   }*/
 
 ?>
