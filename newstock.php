@@ -65,8 +65,8 @@ function lisaaOsake($salkku){
 
     $lkm = ($osake->TapahtumaLkm - $_GET['amount1'];
 
-    $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm) VALUES( :f1)");
-    $stmt->execute(array(':f1' => $lkm));
+    $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm) VALUES( ? )");
+    $stmt->execute(array( $lkm ));
 
     //if ($lkm <= 0){
     //$stmt = $db->prepare("DELETE FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
