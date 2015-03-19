@@ -52,7 +52,6 @@ $kayttaja = new kayttaja;
 $kayttaja->deleteUser($_SESSION['userName']);
 }
 ?>
-<p>poo</p>
 </article>
 
 <article id='salkut'>
