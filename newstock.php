@@ -50,7 +50,7 @@ function lisaaOsake($salkku){
   } else {
   exit();
   }}
-/*
+
   function myyOsake($val){
     require ("/var/www/db-init.php");
     $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi
@@ -65,13 +65,13 @@ function lisaaOsake($salkku){
     $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm) VALUES( :f1)");
     $stmt->execute(array(':f1' => $lkm));
 
-
+/*
     if ($lkm <= 0){
     $stmt = $db->prepare("DELETE FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
     INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
     WHERE KayttajaNimi = ? AND OsakeNimi = ?");
     }
-  */
+*/
     }
 
 ?>

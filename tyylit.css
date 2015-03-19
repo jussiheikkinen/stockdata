@@ -78,7 +78,7 @@ border: 1px solid #999; font-size: 13px; padding: 4px;
 #salkut{ color:black; padding: 2%; width:69%; margin-left:0%; margin-top:1%; background-color: #EEEEEE; float:right;
 }
 
-#omasalkku{max-width:50%; float:left;
+#omasalkku{max-width:50%; float:left; 
 }
 
 #lisaysform{ border: 0px solid black; border-collapse: collapse; max-width:80%;
