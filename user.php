@@ -53,7 +53,15 @@ $oletusSalkku->tulostaSalkku($_SESSION['userName']);
 
 //UUDEN OSAKKEEN LiSÄYS
 include ('newstock.php');
+
+if(isset($_GET['addstock'])){
 lisaaOsake($oletusSalkku->salkkuID);
+}
+
+if(isset($_GET['sellstock'])){
+  $val = $_GET['stock1'];
+  function myyOsake($val);
+}
 ?>
 </article>
 

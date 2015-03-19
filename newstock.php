@@ -6,14 +6,20 @@ echo <<<NEW
 <tr><td>Avg/pcs</td><td><input type="number" name="avg" required></tr></td>
 <tr><td>Amount(pcs)</td><td><input type="number" name="amount" required></tr></td>
 </table>
-<button type="submit" name='addstock'>add</button>
+<button type="submit" name='addstock'>Buy</button>
+</form>
+<form method='get' action='' id='myyntiform'>
+<table>
+<tr><td>Stock name</td><td><input type="text" name="stock1" required></tr></td>
+<tr><td>Amount(pcs)</td><td><input type="number" name="amount1" required></tr></td>
+</table>
+<button type="submit" name='sellstock'>Sell</button>
 </form>
 NEW;
-//<tr><td>Value</td><td><input type="text" name="value"></tr></td>
-//<tr><td>Profit</td><td><input type="text" name="profit"></tr></td>
+
 //Osakkeen lisääminen salkkuun
 function lisaaOsake($salkku){
-if(isset($_GET['addstock'])){
+//if(isset($_GET['addstock'])){
   require ("/var/www/db-init.php");
 
   $a = $salkku;
@@ -44,6 +50,17 @@ if(isset($_GET['addstock'])){
      echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
   } else {
   exit();
-  }}}
+  }}
+
+  function myyOsake($val){
+    $value = $val;
+    //  require ("/var/www/db-init.php");
+echo "kukkuu";
+
+
+  }
+
+
+
 
 ?>
