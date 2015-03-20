@@ -45,13 +45,11 @@ echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>poo</th><th>poo</t
 echo <<<SALKKU
      <tr><td>$osumat[0][0]</td><td>$osumat[$i][1]</td><td>$osumat[$i][5]</td>
      <td>$osumat[$i][11]</td><td>$osumat[$i][12]</tr>
-     </table>;
 SALKKU;
 $i++;
    }
    echo "</table>";
    //print_r ($matches);
-
    }
 
 
