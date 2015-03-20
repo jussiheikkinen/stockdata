@@ -1,50 +1,11 @@
-/*
-var eka = 10;
-var toka = 300 - <?php hae(); ?>;
-var kolmas = 15; 
-var neljäs = 300;
 
-for ( i = 1; i < 30 ; i++) {
-context.fillStyle = "#FF0000";
-//x-alkupiste, y-alkupiste ylhäältä, x+tämä , y- alkupiste alhaalta
-context.fillRect( eka , toka, kolmas, neljäs);
-eka = eka + 20;	
-} 
-*/
-
-//taulukko ja alustus
-	
-/*include 'stokki.php';
-
-function hae(){
-if (isset($_GET['osake']))
-$taulu = nouda($_GET['osake']);
-return $taulu;
-}
-
-$taulu = hae();
-$yritysid = $taulu[58];//
-$osto = $taulu[5];// 5
-$myynti = $taulu[4]; // 4
-$vaihto = $taulu[78]; // 79
-$ylin = $taulu[25]; //25
-$alin = $taulu[24]; //24
-//$pe = $taulu[5]; 
-$range = $taulu[81];//52wk 81
-
-//if ($value < 50)
-//$value = $value * 20;
-
-print_r ($taulu);*/
-
-	
 /*   ***TÄMÄ PÄTKÄ ON SITÄ VARTEN JOS HALUTAAN HAKEA USEMPI KUIN YKSI OSAKE****
-	if ( is_array($symbol) ) { // if the symbol is an array 
+	if ( is_array($symbol) ) { // if the symbol is an array
 		if ( $symbol == NULL ) { // if the symbol is invalid
 			$error_message = "The given symbol is invalid.";
 			return -1; // ERROR
 		}
-		
+
 		$url = "http://finance.yahoo.com/d/quotes.csv?s=" . implode("+", $symbol) . "&f=" . $f; //eli viedään url ja kaikki tagit....
 		$fp = @fopen($url, "r");
 		if ( $fp == FALSE ) { // If the URL can't be opened
@@ -53,7 +14,7 @@ print_r ($taulu);*/
 		}
 
 		$arr = array();
-		//$symbol = explode("+",implode("+", $symbol)); // Eliminate the keys in the symbol array 
+		//$symbol = explode("+",implode("+", $symbol)); // Eliminate the keys in the symbol array
 		$j = 0;
 		while ( ($array = @fgetcsv($fp , 4096 , ', ')) !== FALSE ) {
 			$i = 0;
@@ -68,21 +29,9 @@ print_r ($taulu);*/
 		@fclose($fp);
 		return $arr;
 
-	} else {  // if the symbol is not array 
+	} else {  // if the symbol is not array
 */
 
 	//return -1;
 //}
 
-
-$host="192.168.10.50";
-$port=3306;
-$socket="";
-$user="jussi";
-$password="";
-$dbname="omaDB";
-
-$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
-	or die ('Could not connect to the database server' . mysqli_connect_error());
-
-//$con->close();
