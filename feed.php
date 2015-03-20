@@ -30,7 +30,7 @@ exit;}
 
 $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslista/aktier.html?marknad=Finland&lista=1_1&large=on&mid=on&small=on&sektor=0&subtyp=price&sortera=aktie&sorteringsordning=stigande");
 
-echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>poo</th><th>poo</th><th>poo</th></tr>';
+echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</th><th>Highest</th><th>Lowest</th><th>Volume</th><th>Currency</th></tr>';
    //if (preg_match_all('/underline.>[A-Za-z\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
    if (preg_match_all('/[A-Z]+[A-Za-z\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
 
@@ -43,8 +43,8 @@ echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>poo</th><th>poo</t
    	//print_r ($osumat);
 
 echo <<<SALKKU
-     <tr><td>{$osumat[0][0]}</td><td>{$osumat[0][1]}</td><td>{$osumat[0][5]}</td>
-     <td>{$osumat[0][11]}</td><td>{$osumat[0][12]}</tr>
+     <tr><td>{$osumat[0][0]}</td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td<td>{$osumat[0][5]}</td>
+     <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>{$osumat[0][11]}</tr><td>{$osumat[0][12]}</tr>
 SALKKU;
 $i++;
 }
