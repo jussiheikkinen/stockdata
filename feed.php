@@ -22,8 +22,7 @@ exit;}
 <?php include ('header.php'); ?>
 </header>
 <content>
-<article id = "kayttajat">
-
+<article id="kayttaja">
 <pre>
 
 <?php
@@ -48,12 +47,8 @@ echo <<<SALKKU
 SALKKU;
 $i++;
 }
-
-   echo "</table>";
-   //print_r ($matches);
-   }
-
-
+echo "</table>";
+}
 ?>
 
 </pre>
