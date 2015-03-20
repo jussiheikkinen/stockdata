@@ -22,7 +22,7 @@ exit;}
 <?php include ('header.php'); ?>
 </header>
 <content>
-<article id="kayttaja">
+<article id="feed">
 <pre>
 
 <?php
