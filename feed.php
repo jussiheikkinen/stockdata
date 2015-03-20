@@ -47,10 +47,9 @@ echo <<<SALKKU
      <td>$osumat[$i][11]</td><td>$osumat[$i][12]</tr>
      </table>;
 SALKKU;
-echo "</table>";
 $i++;
    }
-
+   echo "</table>";
    //print_r ($matches);
 
    }
