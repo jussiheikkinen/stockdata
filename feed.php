@@ -40,11 +40,13 @@ $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslist
    	preg_match_all('/[A-Z]+[A-Za-z\s]+|[0-9,%]+/', $matches[0][$i], $osumat);
 
    	$i++;
+   	print_r ($osumat);
    }
 
-   print_r ($matches);
+   //print_r ($matches);
 
    }
+
 
 ?>
 
