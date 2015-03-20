@@ -24,15 +24,48 @@ exit;}
 <content>
 <article id = "kayttajat">
 
-  <?php
+<pre>
 
-  $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslista/aktier.html");
+<?php
 
-     if (preg_match_all('/class=.underline.>[A-Za-z\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
-       echo "loytyi";
-       print_r ($matches);
-     }
-  ?>
+$homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslista/aktier.html");
+
+   //if (preg_match_all('/underline.>[A-Za-z\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
+if (preg_match_all('/[A-Z]+[A-Za-z\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
+
+     	$i = 0;
+	$j = count($matches, COUNT_RECURSIVE) -1 ;
+	while ($i < $j){
+
+	$data = preg_match_all('/[A-Z]+[A-Za-z\s]+|[0-9,%]+/', $matches[0][$i], $osumat);
+
+	$i++;
+print_r ($osumat);
+}
+
+print_r ($matches);
+
+}
+
+/*	$i = 0;
+	$j = count($matches, COUNT_RECURSIVE) -1 ;
+	while ($i < $j){
+	$data = explode("</td>", $matches[0][$i]);// näyttää tältä <td  >37,13</td>
+						// näyttää tältä <td  >37,13
+	$taulu[] = implode("<td >",$data); 	// näyttää tältä <td  >37,13<td >
+	$taulu1[] = explode("<td >",$taulu[$i]);	// pitäsi näyttää tältä 7,13, mutta näytää tältä <td  >37,13
+	$i++;	}   [A-Z]|([a-z]){4,30}\w+|[0-9,%]
+			/<td.class[a-z&0-9=\?.\/"\s<>]+[A-Za-z\s<\/>0-9,="%]+EUR<\/td>/
+     */
+?>
+
+</pre>
+}
+
+}
+?>
+
+  </pre>
 
 <article>
 
