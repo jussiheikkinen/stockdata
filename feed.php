@@ -43,8 +43,8 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
    	//print_r ($osumat);
 
 echo <<<SALKKU
-     <tr><td>{$osumat[0][0]}</td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td<td>{$osumat[0][5]}</td>
-     <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>{$osumat[0][11]}</tr><td>{$osumat[0][12]}</tr>
+     <tr><td>{$osumat[0][0]}</td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td><td>{$osumat[0][5]}</td>
+     <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>{$osumat[0][11]}</td><td>{$osumat[0][12]}</tr>
 SALKKU;
 $i++;
 }
