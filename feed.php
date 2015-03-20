@@ -43,8 +43,8 @@ echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>poo</th><th>poo</t
    	//print_r ($osumat);
 
 echo <<<SALKKU
-     <tr><td>$osumat[0][0]</td><td>$osumat[$i][1]</td><td>$osumat[$i][5]</td>
-     <td>$osumat[$i][11]</td><td>$osumat[$i][12]</tr>
+     <tr><td>echo $osumat[0][0]</td><td>echo $osumat[0][1]</td><td>echo $osumat[0][5]</td>
+     <td>echo $osumat[0][11]</td><td>echo $osumat[0][12]</tr>
 SALKKU;
 
 $i++;
