@@ -30,6 +30,7 @@ exit;}
 
 $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslista/aktier.html?marknad=Finland&lista=1_1&large=on&mid=on&small=on&sektor=0&subtyp=price&sortera=aktie&sorteringsordning=stigande");
 
+echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>poo</th><th>poo</th><th>poo</th></tr>';
    //if (preg_match_all('/underline.>[A-Za-z\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
    if (preg_match_all('/[A-Z]+[A-Za-z\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
 
@@ -39,8 +40,14 @@ $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslist
 
    	preg_match_all('/[A-Z]+[A-Za-z\s]+|[0-9,%]+/', $matches[0][$i], $osumat);
 
-   	$i++;
-   	print_r ($osumat);
+   	//print_r ($osumat);
+
+echo <<<SALKKU
+     <tr><td>$osumat[$i][0]</td><td>$osumat[$i][1]</td><td>$osumat[$i][5]</td>
+     <td>$osumat[$i][11]</td><td>$osumat[$i][12]</tr>
+SALKKU;
+
+$i++;
    }
 
    //print_r ($matches);
