@@ -42,11 +42,12 @@ echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>poo</th><th>poo</t
 
    	//print_r ($osumat);
 
-echo <<<SALKKU
+print_r (<<<SALKKU
      <tr><td>$osumat[0][0 => $key]</td><td>$osumat[$i][1]</td><td>$osumat[$i][5]</td>
      <td>$osumat[$i][11]</td><td>$osumat[$i][12]</tr>
-SALKKU;
-
+     </table>;
+SALKKU);
+</table>;
 $i++;
    }
 
