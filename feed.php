@@ -41,15 +41,17 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
 //tulostuvat vai plc a, plac b sekä volyymistä tulostuu vain osa ennen whitespaces
    	preg_match_all('/[A-Z]+[A-Za-ö\s-]+|[0-9,%]+/', $matches[0][$i], $osumat);
    	//print_r ($osumat);
-     if (is_numeric($osumat[0][13])){
-     $volyme = $osumat[0][10] . $osumat[0][11] . $osumat[0][12];
+     if (is_numeric($osumat[0][12])){
+     $volyme = $osumat[0][10] ." ". $osumat[0][11] ." ". $osumat[0][12];
+     $valuutta = $osumat[0][13];
    } else{
-     $volume = $osumat[0][10] . $osumat[0][11];
+     $volume = $osumat[0][10] ." ". $osumat[0][11];
+     $valuutta = $osumat[0][12];
    }
 
 echo <<<SALKKU
      <tr><td>{$osumat[0][0]}</td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td><td>{$osumat[0][5]}</td>
-     <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>$volume</td><td>{$osumat[0][12]}</tr>
+     <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>$volume</td><td>$valuutta</tr>
 SALKKU;
 $i++;
 }
