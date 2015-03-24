@@ -53,7 +53,11 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
    }
 
    if ($osumat[0][2] == Plus){
+     $color = '"color:blue;"';
+   } else if ($osumat[0][2] == Minus){
      $color = '"color:red;"';
+   }else{
+     $color = '"color:green;"';
    }
 
 echo <<<SALKKU
