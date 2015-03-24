@@ -44,9 +44,12 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
      if (is_numeric($osumat[0][12])){
      $volyme = $osumat[0][10] ." ". $osumat[0][11] ." ". $osumat[0][12];
      $valuutta = $osumat[0][13];
-   } else{
+   } else if (is_numeric($osumat[0][11])){
      $volume = $osumat[0][10] ." ". $osumat[0][11];
      $valuutta = $osumat[0][12];
+   }else{
+     $volume = $osumat[0][10];
+     $valuutta = $osumat[0][11];
    }
 
 echo <<<SALKKU
