@@ -37,7 +37,7 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
    	$j = count($matches, COUNT_RECURSIVE) -1 ;
    	while ($i < $j){
 
-   	preg_match_all('/[A-Z]+[A-Za-z\s]+|[0-9,%]+/', $matches[0][$i], $osumat);
+   	preg_match_all('/[A-Z]+[A-Za-ö\s]+|[0-9,%]+/', $matches[0][$i], $osumat);
 
    	//print_r ($osumat);
 
