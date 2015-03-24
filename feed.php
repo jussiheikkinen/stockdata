@@ -36,14 +36,20 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
         	$i = 0;
    	$j = count($matches, COUNT_RECURSIVE) -1 ;
    	while ($i < $j){
-            //eli alkaa isolla + sanoja / numeroita tai numero merkki .. tai pitkä numerosarja
-   	preg_match_all('/[A-Z]+[A-Za-ö\s-]+|[0-9,%]+/', $matches[0][$i], $osumat); ///vanha oli tämä [A-Z]+[A-Za-ö\s-]+|[0-9,%]+
-
+//eli alkaa isolla + sanoja / numeroita tai numero merkki
+//Huom! Bugeja on esim että Bank of åland Plc a ja b
+//tulostuvat vai plc a, plac b sekä volyymistä tulostuu vain osa ennen whitespaces
+   	preg_match_all('/[A-Z]+[A-Za-ö\s-]+|[0-9,%]+/', $matches[0][$i], $osumat);
    	//print_r ($osumat);
+     if (is_numeric($osumat[0][13])){
+     $volyme = $osumat[0][10] . $osumat[0][11] . $osumat[0][12];
+   } else{
+     $volume = $osumat[0][10] . $osumat[0][11];
+   }
 
 echo <<<SALKKU
      <tr><td>{$osumat[0][0]}</td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td><td>{$osumat[0][5]}</td>
-     <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>{$osumat[0][11]}</td><td>{$osumat[0][12]}</tr>
+     <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>$volume</td><td>{$osumat[0][12]}</tr>
 SALKKU;
 $i++;
 }
