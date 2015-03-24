@@ -36,8 +36,8 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
         	$i = 0;
    	$j = count($matches, COUNT_RECURSIVE) -1 ;
    	while ($i < $j){
-
-   	preg_match_all('/[A-Z]+[A-Za-ö\s-]+|[0-9,%]+/', $matches[0][$i], $osumat);
+            //eli alkaa isolla + sanoja / numeroita tai numero merkki .. tai pitkä numerosarja
+   	preg_match_all('/[A-Z]+[A-Za-ö\s-]+|[0-9]+[\s]+[0-9]+|[0-9,%]+|[\s]+[0-9]/', $matches[0][$i], $osumat); ///vanha oli tämä [A-Z]+[A-Za-ö\s-]+|[0-9,%]+/
 
    	//print_r ($osumat);
 
