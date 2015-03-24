@@ -31,13 +31,13 @@ $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslist
 
 echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</th><th>Highest</th><th>Lowest</th><th>Volume</th><th>Currency</th></tr>';
    //if (preg_match_all('/underline.>[A-Za-ö\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
-   if (preg_match_all('/[A-Z]+[A-Za-ö\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
+   if (preg_match_all('/[A-Z]+[A-Za-ö\s<\/>0-9,="%-]+EUR/',$homepage , $matches)){
 
         	$i = 0;
    	$j = count($matches, COUNT_RECURSIVE) -1 ;
    	while ($i < $j){
 
-   	preg_match_all('/[A-Z]+[A-Za-ö\s]+|[0-9,%]+/', $matches[0][$i], $osumat);
+   	preg_match_all('/[A-Z]+[A-Za-ö\s-]+|[0-9,%]+/', $matches[0][$i], $osumat);
 
    	//print_r ($osumat);
 
