@@ -31,7 +31,7 @@ $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslist
 
 echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</th><th>Highest</th><th>Lowest</th><th>Volume</th><th>Currency</th></tr>';
    //if (preg_match_all('/underline.>[A-Za-ö\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
-   if (preg_match_all('/[A-Z]+[A-Za-ö\s<\/>0-9,.="%-]+EUR/',$homepage , $matches)){
+   if (preg_match_all('/[A-Z]+[A-ZÅÄÖa-zåöä\s<\/>0-9,.="%-]+EUR/',$homepage , $matches)){
 
         	$i = 0;
    	$j = count($matches, COUNT_RECURSIVE) -1 ;
@@ -39,7 +39,7 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
 //eli alkaa isolla + sanoja / numeroita tai numero merkki
 //Huom! Bugeja on esim että Bank of åland Plc a ja b
 //tulostuvat vai plc a, plac b sekä volyymistä tulostuu vain osa ennen whitespaces
-   	preg_match_all('/[A-Z]+[A-Za-ö\s-]+|[0-9,%]+/', $matches[0][$i], $osumat);
+   	preg_match_all('/[A-Z]+[A-ZÅÄÖa-zåöä\s-]+|[0-9,%]+/', $matches[0][$i], $osumat);
    	//print_r ($osumat);
      if (is_numeric($osumat[0][12])){
      $volyme = $osumat[0][10] ." ". $osumat[0][11] ." ". $osumat[0][12];
