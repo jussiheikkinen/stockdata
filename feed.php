@@ -72,13 +72,15 @@ echo "</table>";
 
 <article id="kayttaja" style="float:right;">
   <?php
+  $hinta = (double)$_GET[hinta];
+
   echo <<<NEW
   <div id="lomakkeet">
   <form method='get' action='' id='lisaysform'>
   Buy
   <table>
-  <tr><td>Stock</td><td></td></tr>
-  <tr><td>Avg/pcs</td><td></td></tr>
+  <tr><td>Stock</td><td>$_GET[osake]</td></tr>
+  <tr><td>Avg/pcs</td><td>$hinta</td></tr>
   <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
   </table>
   <button type="submit" name='addstock'>Buy</button>
