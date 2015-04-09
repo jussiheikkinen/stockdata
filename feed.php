@@ -89,6 +89,8 @@ NEW;
 
 require_once 'Salkku.class.php';
 require ("/var/www/db-init.php");
+
+if(isset($_REQUEST['addstock'])){
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
 $lkm = $_GET['amount'];
@@ -110,8 +112,9 @@ $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
 $stmt->execute(array(':f1' => $lkm, ':f2' => $hinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+}
 if ($affected_rows = $stmt->rowCount()){
-   echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
+   echo 'Adding to portfolio suceed';
 } else {
 exit();
 }
