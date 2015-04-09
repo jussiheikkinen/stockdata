@@ -71,10 +71,9 @@ echo "</table>";
 </article>
 <article id="kayttaja" style="float:right; width:27%; margin-left:1%; ">
   <?php
+
   $hinta = (double)$_GET['hinta'];
   $tunnus = $_GET['osake'];
-  $_SESSION['hinta'] = $hinta;
-  $_SESSION['osake'] = $tunnus;
 
   echo <<<NEW
   <div id="lomakkeet">
@@ -96,7 +95,6 @@ $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
 $lkm = $_GET['amount'];
 
-
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
 $stmt->execute(array($b));
 $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
@@ -106,14 +104,14 @@ $stmt->execute(array(1));
 $tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, ?)");
-$stmt->execute(array($_SESSION['osake'], $tiedotid->TiedotId));
+$stmt->execute(array($tunnus, $tiedotid->TiedotId));
 
 $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
-$stmt->execute(array($_SESSION['osake']));
+$stmt->execute(array($tunnus));
 $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
-$stmt->execute(array(':f1' => $lkm, ':f2' => $_SESSION['hinta'], ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+$stmt->execute(array(':f1' => $lkm, ':f2' => $hinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 
 if ($affected_rows = $stmt->rowCount()){
    echo 'Adding to portfolio suceed';
