@@ -121,7 +121,7 @@ $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, Tapah
 $stmt->execute(array(':f1' => $lkm, ':f2' => $_COOKIE['hinta'], ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 
 if ($affected_rows = $stmt->rowCount()){
-   echo 'Adding to portfolio suceed';
+   echo 'Adding to portfolio succeed';
 }else {
 exit();
 }}
