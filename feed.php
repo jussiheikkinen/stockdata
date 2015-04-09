@@ -89,7 +89,7 @@ NEW;
 
 require_once 'Salkku.class.php';
 require ("/var/www/db-init.php");
-
+if (isset($_GET['addstock'])){
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
 $lkm = $_GET['amount'];
@@ -115,7 +115,7 @@ if ($affected_rows = $stmt->rowCount()){
    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
 } else {
 exit();
-}
+}}
 ?>
 
 <article>
