@@ -8,7 +8,7 @@ Buy
 <tr><td>Avg/pcs</td><td><input type="number" name="avg" required></tr></td>
 <tr><td>Amount</td><td><input type="number" name="amount" required></tr></td>
 </table>
-<button type="submit" name='addstock'>add</button>
+<button type="submit" name='addstock'>Buy</button>
 </form>
 
 <form method='get' action='' id='myyntiform'>
