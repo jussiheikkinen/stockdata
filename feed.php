@@ -76,14 +76,16 @@ echo "</table>";
 
   setcookie ("hinta", (double)$_GET['hinta']);
   setcookie ("osake", $_GET['osake']);
+  $hinta = $_COOKIE['hinta'];
+  $tunnus = $_COOKIE['osake'];
 
   echo <<<NEW
   <div id="lomakkeet">
   <form method='get' action='' id='lisaysform'>
   Buy
   <table>
-  <tr><td>Stock</td><td>$_COOKIE['osake']</td></tr>
-  <tr><td>Price</td><td>$_COOKIE['hinta']</td></tr>
+  <tr><td>Stock</td><td>$tunnus</td></tr>
+  <tr><td>Price</td><td>$hinta</td></tr>
   <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
   </table>
   <button type='submit' name='addstock'>Buy</button>
