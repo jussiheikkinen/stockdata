@@ -19,7 +19,7 @@ Sell
 <tr><td>Amount</td><td><input type="number" name="amount1" required></td></tr>
 </table>
 <button type="submit" name='sellstock'>Sell</button>
-</form> 
+</form>
 <div>
 NEW;
 }
@@ -37,12 +37,12 @@ function lisaaOsake($salkku){
   $stmt->execute(array($b));
   $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
 
-  $stmt = $db->prepare("SELECT TiedotId FROM Tiedot WHERE TiedotId =?");
-  $stmt->execute(array(1));
-  $tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
+  //stmt = $db->prepare("SELECT TiedotId FROM Tiedot WHERE TiedotId =?");
+  //$stmt->execute(array(1));
+  //tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
 
-  $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, ?)");
-  $stmt->execute(array($tunnus, $tiedotid->TiedotId));
+  $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, (SELECT TiedotId FROM Tiedot WHERE TiedotId = 1))");
+  $stmt->execute(array($tunnus));
 
   $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
   $stmt->execute(array($tunnus));
