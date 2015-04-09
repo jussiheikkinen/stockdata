@@ -83,7 +83,7 @@ echo "</table>";
   </table>
   <button type="submit" name='addstock'>Buy</button>
   </form>
-  NEW;
+NEW;
   ?>
 <article>
 
