@@ -71,13 +71,11 @@ echo "</table>";
 </article>
 <article id="kayttaja" style="float:right; width:27%; margin-left:1%; ">
   <?php
-  //$hinta = (double)$_GET['hinta'];
-  //$tunnus = $_GET['osake'];
+  $hinta = (double)$_GET['hinta'];
+  $tunnus = $_GET['osake'];
 
-  setcookie ("hinta", (double)$_GET['hinta']);
-  setcookie ("osake", $_GET['osake']);
-  $hinta = $_COOKIE['hinta'];
-  $tunnus = $_COOKIE['osake'];
+  setcookie ("hinta", $hinta, time() + 3600));
+  setcookie ("osake", $tunnus, time() + 3600));
 
   echo <<<NEW
   <div id="lomakkeet">
