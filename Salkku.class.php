@@ -55,7 +55,7 @@ echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>avg-price</th><th>
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 $kurssi = haeHinta($row['OsakeNimi']);
 if ($kurssi == NULL){
-	$kurssi == $row['TapahtumaHinta'];
+	$kurssi = $row['TapahtumaHinta'];
 }
 $hinta = ($row['TapahtumaLkm'] * $row['TapahtumaHinta']);
 $arvo = $hinta + (($kurssi[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
