@@ -87,10 +87,10 @@ echo "</table>";
   </form>
 NEW;
 
-if (isset($_REQUEST[addstock])){
 require_once 'Salkku.class.php';
 require ("/var/www/db-init.php");
 
+if (isset($_REQUEST[addstock])){
 $oletusSalkku = new Salkku();
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
