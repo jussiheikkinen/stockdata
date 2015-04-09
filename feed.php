@@ -60,8 +60,8 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
      $color = '"color:green;"';
    }
 
-echo <<<SALKKU
-     <tr><td><a href="osake={$osumat[0][0]}&hinta={$osumat[0][1]}">{$osumat[0][0]}</a></td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td><td style=$color>{$osumat[0][5]}</td>
+echo <<<SALKKU  //linkkien ohjausrakenne tehty <a></a> kohdassa
+     <tr><td><a href="feed.php?osake={$osumat[0][0]}&hinta={$osumat[0][1]}">{$osumat[0][0]}</a></td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td><td style=$color>{$osumat[0][5]}</td>
      <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>$volume</td><td>$valuutta</td></tr>
 SALKKU;
 $i++;
