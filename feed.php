@@ -69,7 +69,7 @@ echo "</table>";
 ?>
 </pre>
 </article>
-<article id="kayttaja" style="float:right; width:25%; margin-left:1%; ">
+<article id="kayttaja" style="float:right; width:26%; margin-left:1%; ">
   <?php
   $hinta = (double)$_GET['hinta'];
   $tunnus = $_GET['osake'];
@@ -92,9 +92,7 @@ require ("/var/www/db-init.php");
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
 $lkm = $_GET['amount'];
-echo $lkm;
 
-if(isset($_GET["amount"])){
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
 $stmt->execute(array($b));
 $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
@@ -117,7 +115,7 @@ if ($affected_rows = $stmt->rowCount()){
    echo 'Adding to portfolio suceed';
 }else {
 exit();
-}}
+}
 ?>
 </article>
 
