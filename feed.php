@@ -90,7 +90,7 @@ NEW;
 require_once 'Salkku.class.php';
 require ("/var/www/db-init.php");
 
-if (isset($_REQUEST[addstock])){
+if (isset($_GET['addstock'])){
 $oletusSalkku = new Salkku();
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
