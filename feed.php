@@ -69,7 +69,7 @@ echo "</table>";
 ?>
 </pre>
 </article>
-<article id="kayttaja" style="float:right; width:26%; margin-left:1%; ">
+<article id="kayttaja" style="float:right; width:27%; margin-left:1%; ">
   <?php
   $hinta = (double)$_GET['hinta'];
   $tunnus = $_GET['osake'];
@@ -87,6 +87,7 @@ echo "</table>";
   </form>
 NEW;
 
+if (isset($_GET["addstock"])){
 require_once 'Salkku.class.php';
 require ("/var/www/db-init.php");
 $a = $oletusSalkku->salkkuID;
@@ -112,10 +113,10 @@ $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, Tapah
 $stmt->execute(array(':f1' => $lkm, ':f2' => $hinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 
 if ($affected_rows = $stmt->rowCount()){
-   echo 'Adding to portfolio suceed';
+   echo 'Adding to portfolio succeed';
 }else {
 exit();
-}
+}}
 ?>
 </article>
 
