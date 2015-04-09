@@ -88,6 +88,10 @@ echo "</table>";
 NEW;
 
 if (isset($_GET["addstock"])){
+lisaaKantaan();
+}
+
+function lisaaKantaan(){
 require_once 'Salkku.class.php';
 require ("/var/www/db-init.php");
 $a = $oletusSalkku->salkkuID;
