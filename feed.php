@@ -92,7 +92,7 @@ require ("/var/www/db-init.php");
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
 $lkm = $_GET['amount'];
-
+echo $lkm;
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
 $stmt->execute(array($b));
 $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
