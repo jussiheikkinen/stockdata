@@ -24,9 +24,7 @@ exit;}
 <content>
 <article id="feed">
 <pre>
-
 <?php
-
 $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslista/aktier.html?marknad=Finland&lista=1_1&large=on&mid=on&small=on&sektor=0&subtyp=price&sortera=aktie&sorteringsordning=stigande");
 
 echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</th><th>Highest</th><th>Lowest</th><th>Volume</th><th>Currency</th></tr>';
@@ -69,11 +67,17 @@ $i++;
 echo "</table>";
 }
 ?>
-
 </pre>
-
 <article>
-
+<article id="kayttaja" style="float:right;">
+  <?php
+  //UUDEN OSAKKEEN LiSÄYS
+  include ('newstock.php');
+  if(isset($_GET['addstock'])){
+  lisaaOsake($oletusSalkku->salkkuID);
+  }
+  ?>
+<article>
 </content>
 </body>
 
