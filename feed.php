@@ -73,10 +73,12 @@ echo "</table>";
   <?php
   $hinta = (double)$_GET['hinta'];
   $tunnus = $_GET['osake'];
+  $a = "hinta";
+  $b = "osake";
 
-  setcookie("hinta", "tyhjää", time() + 3600);
-  setcookie("hinta", $hinta, time() + 3600);
-  setcookie("osake", $tunnus, time() + 3600);
+  setcookie("hinta", "tyhjää", time() + 3600, '/');
+  setcookie($a, $hinta, time() + 3600, '/');
+  setcookie($b, $tunnus, time() + 3600, '/');
 
   echo <<<NEW
   <div id="lomakkeet">
