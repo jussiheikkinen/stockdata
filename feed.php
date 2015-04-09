@@ -59,7 +59,7 @@ echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</
    }
 
 echo <<<SALKKU
-     <tr><td><a href="feed.php?stock={$osumat[0][0]}&price={$osumat[0][1]}">{$osumat[0][0]}</a></td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td><td style=$color>{$osumat[0][5]}</td>
+     <tr><td><a href="feed.php?osake={$osumat[0][0]}&hinta={$osumat[0][1]}">{$osumat[0][0]}</a></td><td>{$osumat[0][1]}</td><td>{$osumat[0][3]}</td><td style=$color>{$osumat[0][5]}</td>
      <td>{$osumat[0][8]}</td><td>{$osumat[0][9]}</td><td>$volume</td><td>$valuutta</td></tr>
 SALKKU;
 $i++;
@@ -72,14 +72,14 @@ echo "</table>";
 <article id="kayttaja" style="float:right; margin-left:10%;">
   <?php
   include (newstock);
-  $hinta = (double)$_GET[price];
+  $hinta = (double)$_GET[hinta];
 
   echo <<<NEW
   <div id="lomakkeet">
   <form method='get' action='' id='lisaysform'>
   Buy
   <table>
-  <tr><td>Stock</td><td>$_GET[stock]</td></tr>
+  <tr><td>Stock</td><td>$_GET[osake]</td></tr>
   <tr><td>Price</td><td>$hinta</td></tr>
   <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
   </table>
@@ -89,7 +89,7 @@ NEW;
 
 require_once 'Salkku.class.php';
 $oletusSalkku = new Salkku();
-lisaaOsake($oletusSalkku->salkkuID);
+lisaaKotimainenOsake($oletusSalkku->salkkuID, $hinta, $_GET[amount] );
 ?>
 
 <article>

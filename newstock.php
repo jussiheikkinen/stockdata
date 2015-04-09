@@ -56,6 +56,39 @@ function lisaaOsake($salkku){
   exit();
   }}
 
+  function lisaaKotimainenOsake($salkku, $hinta, $amount){
+    require ("/var/www/db-init.php");
+
+    $a = $salkku;
+    $b =  $_SESSION['userName'];
+    $tunnus = $_GET['osake']; //Osakkeet aina isoilla kirjaimilla
+    $ostohinta = $hinta;
+    $lkm = $amount;
+
+    $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
+    $stmt->execute(array($b));
+    $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
+
+    $stmt = $db->prepare("SELECT TiedotId FROM Tiedot WHERE TiedotId =?");
+    $stmt->execute(array(1));
+    $tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
+
+    $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, ?)");
+    $stmt->execute(array($tunnus, $tiedotid->TiedotId));
+
+    $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
+    $stmt->execute(array($tunnus));
+    $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
+
+    $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
+    $stmt->execute(array(':f1' => $lkm, ':f2' => $ostohinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+    if ($affected_rows = $stmt->rowCount()){
+       echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
+    } else {
+    exit();
+    }}
+
+
   function myyOsake(){
     require ("/var/www/db-init.php");
 /*
