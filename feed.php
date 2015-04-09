@@ -69,7 +69,7 @@ echo "</table>";
 ?>
 </pre>
 </article>
-<article id="kayttaja" style="float:right; ">
+<article id="kayttaja" style="float:right; width:25%; margin-left:1%; ">
   <?php
   $hinta = (double)$_GET['hinta'];
   $tunnus = $_GET['osake'];
