@@ -111,14 +111,14 @@ $stmt->execute(array(1));
 $tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, ?)");
-$stmt->execute(array($tunnus, $tiedotid->TiedotId));
+$stmt->execute(array($_COOKIE['osake'], $tiedotid->TiedotId));
 
 $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
-$stmt->execute(array($tunnus));
+$stmt->execute(array($_COOKIE['osake']));
 $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
-$stmt->execute(array(':f1' => $lkm, ':f2' => $hinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+$stmt->execute(array(':f1' => $lkm, ':f2' => $_COOKIE['hinta'], ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 
 if ($affected_rows = $stmt->rowCount()){
    echo 'Adding to portfolio suceed';
