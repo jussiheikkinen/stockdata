@@ -54,7 +54,7 @@ function lisaaOsake($salkku){
 
   function myyOsake(){
     require ("/var/www/db-init.php");
-
+/*
     $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi
     FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
     INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
@@ -73,7 +73,7 @@ function lisaaOsake($salkku){
     if ($affected_rows = $stmt->rowCount()){
        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
     } else {
-    exit();
+    exit(); */
     }
 
 ?>
