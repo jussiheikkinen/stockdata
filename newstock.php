@@ -1,13 +1,14 @@
 <?php
 function tulostaLomake(){
+$tunnus = $_GET['osake'];
 echo <<<NEW
 <div id="lomakkeet">
 <form method='get' action='' id='lisaysform'>
 Buy
 <table>
-<tr><td>Stock</td><td><input type="text" name="stock" required></tr></td>
-<tr><td>Price</td><td><input type="number" name="price" required></tr></td>
-<tr><td>Amount</td><td><input type="number" name="amount" required></tr></td>
+<tr><td>Stock</td><td><input type="text" name="stock" required></td></tr>
+<tr><td>Price</td><td><input type="number" name="price" required></td></tr>
+<tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
 </table>
 <button type="submit" name='addstock'>Buy</button>
 </form>
@@ -15,8 +16,9 @@ Buy
 <form method='get' action='' id='myyntiform'>
 Sell
 <table>
-<tr><td>Stock</td><td><input type="text" name="stock1" required></tr></td>
-<tr><td>Amount</td><td><input type="number" name="amount1" required></tr></td>
+//<tr><td>Stock</td><td><input type="text" name="stock1" required></td></tr>
+<tr><td>Stock</td><td>$tunnus</td></tr>
+<tr><td>Amount</td><td><input type="number" name="amount1" required></td></tr>
 </table>
 <button type="submit" name='sellstock'>Sell</button>
 </form>
