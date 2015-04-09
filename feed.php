@@ -74,7 +74,7 @@ echo "</table>";
 
   $hinta = (double)$_GET['hinta'];
   $tunnus = $_GET['osake'];
-  setcookie("osake", "$tunnus", time()+86400);
+  setcookie("osake", "$tunnus", time()+86400, '/', 'http://88.114.143.213');
 
   echo <<<NEW
   <div id="lomakkeet">
