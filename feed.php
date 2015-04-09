@@ -69,9 +69,9 @@ echo "</table>";
 ?>
 </pre>
 <article>
-
 <article id="kayttaja" style="float:right; margin-left:10%;">
   <?php
+  include (newstock);
   $hinta = (double)$_GET[hinta];
 
   echo <<<NEW
@@ -86,7 +86,11 @@ echo "</table>";
   <button type="submit" name='addstock'>Buy</button>
   </form>
 NEW;
+
+//$oletusSalkku = new Salkku();
+lisaaOsake($oletusSalkku->salkkuID);
   ?>
+
 <article>
 
 </content>
