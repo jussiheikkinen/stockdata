@@ -71,14 +71,15 @@ echo "</table>";
 <article>
 <article id="kayttaja" style="float:right; margin-left:10%;">
   <?php
-  $hinta = (double)$_GET[hinta];
+  $hinta = (double)$_GET['hinta'];
+  $tunnus = $_GET['osake'];
 
   echo <<<NEW
   <div id="lomakkeet">
   <form method='get' action='' id='lisaysform'>
   Buy
   <table>
-  <tr><td>Stock</td><td>$_GET[osake]</td></tr>
+  <tr><td>Stock</td><td>$tunnus</td></tr>
   <tr><td>Price</td><td>$hinta</td></tr>
   <tr><td>Amount</td><td><input type='number' name='maara' required></td></tr>
   </table>
@@ -93,8 +94,7 @@ require ("/var/www/db-init.php");
 $oletusSalkku = new Salkku();
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
-$tunnus = $_GET[osake]; //Osakkeet aina isoilla kirjaimilla
-$ostohinta = $hinta;
+$tunnus; //Osakkeet aina isoilla kirjaimilla
 $lkm = $_GET['maara'];
 
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
@@ -113,7 +113,7 @@ $stmt->execute(array($tunnus));
 $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
-$stmt->execute(array(':f1' => $lkm, ':f2' => $ostohinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+$stmt->execute(array(':f1' => $lkm, ':f2' => $hinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 if ($affected_rows = $stmt->rowCount()){
    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
 } else {
