@@ -94,6 +94,8 @@ if (isset($_GET['addstock'])){
 $oletusSalkku = new Salkku();
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
+$tunnus = $_GET['osake']; //Osakkeet aina isoilla kirjaimilla
+$ostohinta = $_GET['hinta'];
 $lkm = $_GET['amount'];
 
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
@@ -112,7 +114,7 @@ $stmt->execute(array($tunnus));
 $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
-$stmt->execute(array(':f1' => $lkm, ':f2' => $hinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+$stmt->execute(array(':f1' => $lkm, ':f2' => $ostohinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 if ($affected_rows = $stmt->rowCount()){
    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
 } else {
