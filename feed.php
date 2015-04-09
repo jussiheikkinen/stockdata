@@ -81,7 +81,7 @@ echo "</table>";
   <table>
   <tr><td>Stock</td><td>$tunnus</td></tr>
   <tr><td>Price</td><td>$hinta</td></tr>
-  <tr><td>Amount</td><td><input type='number' name='maara' required></td></tr>
+  <tr><td>Amount</td><td><input type="number" name="maara" required></td></tr>
   </table>
   <button type='submit' name='addstock'>Buy</button>
   </form>
