@@ -74,7 +74,9 @@ echo "</table>";
 
   $hinta = (double)$_GET['hinta'];
   $tunnus = $_GET['osake'];
-
+  if (!isset($_COOKIE['osake'])){
+  setcookie("osake", $tunnus];
+}
   echo <<<NEW
   <div id="lomakkeet">
   <form method='get' action='' id='lisaysform'>
