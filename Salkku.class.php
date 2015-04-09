@@ -53,9 +53,8 @@ $stmt->execute(array($kayttaja));
 echo '<h3>' .  $this->salkkuID .'<h3>';
 echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>avg-price</th><th>amount</th><th>price</th><th>total</th><th>profit</th><th>currency</th></tr>';
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-if 	(haeHinta($row['OsakeNimi']) != -1){
-	$kurssi = haeHinta($row['OsakeNimi']);
-}else{
+$kurssi = haeHinta($row['OsakeNimi']);
+if 	($kurssi == -1){
 	$kurssi = $row['TapahtumaHinta'];
 }
 //$kurssi = haeHinta($row['OsakeNimi']);
