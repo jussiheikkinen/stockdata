@@ -81,7 +81,7 @@ echo "</table>";
   <table>
   <tr><td>Stock</td><td>$tunnus</td></tr>
   <tr><td>Price</td><td>$hinta</td></tr>
-  <tr><td>Amount</td><td><input type="number" name="maara" required></td></tr>
+  <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
   </table>
   <button type='submit' name='addstock'>Buy</button>
   </form>
@@ -94,7 +94,7 @@ require ("/var/www/db-init.php");
 $oletusSalkku = new Salkku();
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
-$lkm = $_GET['maara'];
+$lkm = $_GET['amount'];
 
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
 $stmt->execute(array($b));
