@@ -73,12 +73,8 @@ echo "</table>";
   <?php
   $hinta = (double)$_GET['hinta'];
   $tunnus = $_GET['osake'];
-  $a = "hinta";
-  $b = "osake";
-
-  setcookie("hinta", "tyhjää", time() + 3600, '/');
-  setcookie($a, $hinta, time() + 3600, '/');
-  setcookie($b, $tunnus, time() + 3600, '/');
+  $_SESSION['hinta'] = $hinta;
+  $_SESSION['osake'] = $tunnus;
 
   echo <<<NEW
   <div id="lomakkeet">
@@ -110,14 +106,14 @@ $stmt->execute(array(1));
 $tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, ?)");
-$stmt->execute(array($_COOKIE['osake'], $tiedotid->TiedotId));
+$stmt->execute(array($_SESSION['osake'], $tiedotid->TiedotId));
 
 $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
-$stmt->execute(array($_COOKIE['osake']));
+$stmt->execute(array($_SESSION['osake']));
 $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
-$stmt->execute(array(':f1' => $lkm, ':f2' => $_COOKIE['hinta'], ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+$stmt->execute(array(':f1' => $lkm, ':f2' => $_SESSION['hinta'], ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 
 if ($affected_rows = $stmt->rowCount()){
    echo 'Adding to portfolio suceed';
