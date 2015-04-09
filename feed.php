@@ -5,10 +5,10 @@ if (!isset($_SESSION['app1_islogged']) || $_SESSION['app1_islogged'] !== true) {
 header('Location:' . dirname($_SERVER['PHP_SELF']) . '/' . 'kirjaudu.php');
 exit;}
 
-if (isset([$_GET['osake'])){
+if (isset($_GET['osake'])){
 setcookie("osake", $_GET['osake'], time()+86400);
 }
-if (isset([$_GET['hinta'])){
+if (isset($_GET['hinta'])){
 setcookie("hinta", (double)$_GET['hinta'], time()+86400);
 }
 ?>
