@@ -94,7 +94,6 @@ require ("/var/www/db-init.php");
 $oletusSalkku = new Salkku();
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
-$tunnus; //Osakkeet aina isoilla kirjaimilla
 $lkm = $_GET['maara'];
 
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
