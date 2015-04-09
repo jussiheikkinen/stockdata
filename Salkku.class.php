@@ -62,7 +62,7 @@ $arvo = $hinta + (($kurssi[0] - $row['TapahtumaHinta']) * $row['TapahtumaLkm']);
 $prosentti = round((($arvo/$hinta)*100)-100, 1, PHP_ROUND_HALF_UP);//pyöristys
 
 echo <<<SALKKU
-<tr><td>{$row['TapahtumaAika']></td><td><a href="user.php?osake={$row['OsakeNimi']}">{$row['OsakeNimi']}</a></td><td>{$row['TapahtumaHinta']}</td>
+<tr><td>{$row['TapahtumaAika']></td><td><a href="user.php?osake=$row['OsakeNimi']">{$row['OsakeNimi']}</a></td><td>{$row['TapahtumaHinta']}</td>
 <td>{$row['TapahtumaLkm']}</td><td>$kurssi[0]</td><td>$arvo</td><td>$prosentti</td><td>{$row['TiedotValuutta']}</td></tr>
 SALKKU;
 }
