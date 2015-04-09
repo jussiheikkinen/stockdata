@@ -19,7 +19,7 @@ Sell
 <tr><td>Amount</td><td><input type="number" name="amount1" required></td></tr>
 </table>
 <button type="submit" name='sellstock'>Sell</button>
-</form>
+</form> 
 <div>
 NEW;
 }
