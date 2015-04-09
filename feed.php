@@ -107,7 +107,7 @@ $stmt->execute(array($b));
 $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("SELECT TiedotId FROM Tiedot WHERE TiedotId =?");
-$stmt->execute(array(1));
+$stmt->execute(array(2));
 $tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, ?)");
