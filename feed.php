@@ -80,22 +80,22 @@ echo "</table>";
   <table>
   <tr><td>Stock</td><td>$_GET[osake]</td></tr>
   <tr><td>Price</td><td>$hinta</td></tr>
-  <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
+  <tr><td>Amount</td><td><input type='number' name='maara' required></td></tr>
   </table>
-  <button type="submit" name='addstock'>Buy</button>
+  <button type='submit' name='addstock'>Buy</button>
   </form>
 NEW;
 
+if (isset($_REQUEST[addstock])){
 require_once 'Salkku.class.php';
-$oletusSalkku = new Salkku();
-
 require ("/var/www/db-init.php");
 
+$oletusSalkku = new Salkku();
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
 $tunnus = $_GET[osake]; //Osakkeet aina isoilla kirjaimilla
 $ostohinta = $hinta;
-$lkm = $_GET['amount'];
+$lkm = $_GET['maara'];
 
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
 $stmt->execute(array($b));
@@ -118,7 +118,7 @@ if ($affected_rows = $stmt->rowCount()){
    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
 } else {
 exit();
-}
+}}
 ?>
 
 <article>
