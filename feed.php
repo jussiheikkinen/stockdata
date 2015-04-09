@@ -88,15 +88,14 @@ echo "</table>";
 NEW;
 
 if (isset($_GET["addstock"])){
-lisaaKantaan();
+lisaaKantaan($hinta, $tunnus, $_GET['amount']);
 }
 
-function lisaaKantaan(){
+function lisaaKantaan($hinta, $tunnus, $lkm){
 require_once 'Salkku.class.php';
 require ("/var/www/db-init.php");
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
-$lkm = $_GET['amount'];
 
 $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
 $stmt->execute(array($b));
