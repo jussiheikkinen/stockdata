@@ -115,8 +115,9 @@ $stmt->execute(array(':f1' => $lkm, ':f2' => $hinta, ':f3' => $salkkuid->SalkkuI
 
 if ($affected_rows = $stmt->rowCount()){
    echo 'Adding to portfolio suceed';
-}} else {
+}else {
 exit();
+}
 }
 ?>
 
