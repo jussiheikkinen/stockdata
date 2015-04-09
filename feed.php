@@ -106,12 +106,8 @@ $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON Kayttaj
 $stmt->execute(array($b));
 $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
 
-$stmt = $db->prepare("SELECT TiedotId FROM Tiedot WHERE TiedotId =?");
-$stmt->execute(array(2));
-$tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
-
-$stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, ?)");
-$stmt->execute(array($_COOKIE['osake'], $tiedotid->TiedotId));
+$stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, 2)");
+$stmt->execute(array($_COOKIE['osake']));
 
 $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
 $stmt->execute(array($_COOKIE['osake']));

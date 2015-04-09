@@ -37,11 +37,7 @@ function lisaaOsake($salkku){
   $stmt->execute(array($b));
   $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
 
-  //stmt = $db->prepare("SELECT TiedotId FROM Tiedot WHERE TiedotId =?");
-  //$stmt->execute(array(1));
-  //tiedotid =  $stmt->fetch(PDO::FETCH_OBJ);
-
-  $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, (SELECT TiedotId FROM Tiedot WHERE TiedotId = 1))");
+  $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, 1)");
   $stmt->execute(array($tunnus));
 
   $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
