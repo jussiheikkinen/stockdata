@@ -87,9 +87,10 @@ echo "</table>";
   </form>
 NEW;
 
-//$oletusSalkku = new Salkku();
+require_once 'Salkku.class.php';
+$oletusSalkku = new Salkku();
 lisaaOsake($oletusSalkku->salkkuID);
-  ?>
+?>
 
 <article>
 
