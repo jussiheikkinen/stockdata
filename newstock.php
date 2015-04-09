@@ -6,7 +6,7 @@ echo <<<NEW
 Buy
 <table>
 <tr><td>Stock</td><td><input type="text" name="stock" required></tr></td>
-<tr><td>Price</td><td><input type="number" name="avg" required></tr></td>
+<tr><td>Price</td><td><input type="number" name="price" required></tr></td>
 <tr><td>Amount</td><td><input type="number" name="amount" required></tr></td>
 </table>
 <button type="submit" name='addstock'>Buy</button>
@@ -30,7 +30,7 @@ function lisaaOsake($salkku){
   $a = $salkku;
   $b =  $_SESSION['userName'];
   $tunnus = strtoupper($_GET['stock']); //Osakkeet aina isoilla kirjaimilla
-  $ostohinta = $_GET['avg'];
+  $ostohinta = $_GET['price'];
   $lkm = $_GET['amount'];
 
   $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
