@@ -71,19 +71,19 @@ echo "</table>";
 </article>
 <article id="kayttaja" style="float:right; width:27%; margin-left:1%; ">
   <?php
-  $hinta = (double)$_GET['hinta'];
-  $tunnus = $_GET['osake'];
+  //$hinta = (double)$_GET['hinta'];
+  //$tunnus = $_GET['osake'];
 
-  setcookie ("hinta", "$hinta");
-  setcookie ("osake", "$tunnus");
+  setcookie ("hinta", (double)$_GET['hinta']);
+  setcookie ("osake", $_GET['osake']);
 
   echo <<<NEW
   <div id="lomakkeet">
   <form method='get' action='' id='lisaysform'>
   Buy
   <table>
-  <tr><td>Stock</td><td>$tunnus</td></tr>
-  <tr><td>Price</td><td>$hinta</td></tr>
+  <tr><td>Stock</td><td>$_COOKIE['osake']</td></tr>
+  <tr><td>Price</td><td>$_COOKIE['hinta']</td></tr>
   <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
   </table>
   <button type='submit' name='addstock'>Buy</button>
