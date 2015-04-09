@@ -90,11 +90,8 @@ NEW;
 require_once 'Salkku.class.php';
 require ("/var/www/db-init.php");
 
-if (isset($_GET['addstock'])){
-$oletusSalkku = new Salkku();
 $a = $oletusSalkku->salkkuID;
 $b =  $_SESSION['userName'];
-$tunnus = $_GET['osake']; //Osakkeet aina isoilla kirjaimilla
 $ostohinta = $_GET['hinta'];
 $lkm = $_GET['amount'];
 
@@ -119,7 +116,7 @@ if ($affected_rows = $stmt->rowCount()){
    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
 } else {
 exit();
-}}
+}
 ?>
 
 <article>
