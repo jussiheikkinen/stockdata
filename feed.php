@@ -70,7 +70,7 @@ echo "</table>";
 </pre>
 <article>
 
-<article id="kayttaja" style="float:right;">
+<article id="kayttaja" style="float:right; margin-left:10%;">
   <?php
   $hinta = (double)$_GET[hinta];
 
@@ -80,7 +80,7 @@ echo "</table>";
   Buy
   <table>
   <tr><td>Stock</td><td>$_GET[osake]</td></tr>
-  <tr><td>Avg/pcs</td><td>$hinta</td></tr>
+  <tr><td>Price</td><td>$hinta</td></tr>
   <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
   </table>
   <button type="submit" name='addstock'>Buy</button>

@@ -35,6 +35,7 @@ User:<?php echo ' '.$_SESSION['userName']?><br><br>
 <?php
 //UUDEN OSAKKEEN LiSÄYS
 include ('newstock.php');
+tulostaLomake();
 if(isset($_GET['addstock'])){
 lisaaOsake($oletusSalkku->salkkuID);
 }

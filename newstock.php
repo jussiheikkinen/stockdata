@@ -1,11 +1,12 @@
 <?php
+function tulostaLomake(){
 echo <<<NEW
 <div id="lomakkeet">
 <form method='get' action='' id='lisaysform'>
 Buy
 <table>
 <tr><td>Stock</td><td><input type="text" name="stock" required></tr></td>
-<tr><td>Avg/pcs</td><td><input type="number" name="avg" required></tr></td>
+<tr><td>Price</td><td><input type="number" name="avg" required></tr></td>
 <tr><td>Amount</td><td><input type="number" name="amount" required></tr></td>
 </table>
 <button type="submit" name='addstock'>Buy</button>
@@ -21,7 +22,7 @@ Sell
 </form>
 <div>
 NEW;
-
+}
 //Osakkeen lisääminen salkkuun
 function lisaaOsake($salkku){
   require ("/var/www/db-init.php");
