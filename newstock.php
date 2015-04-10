@@ -5,12 +5,13 @@ echo <<<NEW
 <form method='get' action='' id='lisaysform'>
 Buy
 <table>
-<tr><td>Stock</td><td><input type="text" name="stock" required></td></tr>
+<tr><td>Stock</td><td><input type="text" onkeyup="showHint(this.value)" name="stock" required></td></tr>
 <tr><td>Price</td><td><input type="number" name="price" required></td></tr>
 <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
 </table>
 <button type="submit" name='addstock'>Buy</button>
 </form>
+<p>Suggestions: <span id="txtHint"></span></p>
 
 <form method='get' action='' id='myyntiform'>
 Sell
