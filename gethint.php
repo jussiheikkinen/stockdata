@@ -1,8 +1,8 @@
 <?php
 
 // Array with names
-$filename = "/osakenimet.txt";
-if (!$fp = @fopen($filename, "r")) {$hint == "fopen virhe!"; exit();}
+$filename = "osakenimet.txt";
+if (!$fp = @fopen($filename, "r")) {echo "fopen virhe!"; exit();}
 
 while (!feof($fp))
    $a[] = fgets($fp, 20);
