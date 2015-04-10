@@ -5,7 +5,7 @@ $filename = "osakenimet.txt";
 if (!$fp = @fopen($filename, "r")) {echo "fopen virhe!"; exit();}
 
 while (!feof($fp)){
-   $a[] = explode( ',',fgets($fp, 20));
+   $a[] = fgets($fp, 10);
 }
    fclose ($fp);
 
