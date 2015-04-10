@@ -3,15 +3,14 @@ function tulostaLomake(){
 echo <<<NEW
 <div id="lomakkeet">
 <form method='get' action='' id='lisaysform'>
-Buy
+<p>Buy  **<span id="txtHint"></span>**</p>
 <table>
-<tr><td>Stock</td><td><input type="text" value="<span id="txtHint"></span>" onkeyup="showHint(this.value)" name="stock" required></td></tr>
+<tr><td>Stock</td><td><input type="text" onkeyup="showHint(this.value)" name="stock" required></td></tr>
 <tr><td>Price</td><td><input type="number" name="price" required></td></tr>
 <tr><td>Amount</td><td><input type="number" name="amount" required></td></tr>
 </table>
 <button type="submit" name='addstock'>Buy</button>
 </form>
-//<p>Suggestions: <span id="txtHint"></span></p>
 
 <form method='get' action='' id='myyntiform'>
 Sell
