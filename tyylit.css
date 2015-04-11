@@ -84,10 +84,10 @@ border: 1px solid #999; font-size: 13px; padding: 4px;
 #omasalkku{max-width:100%; float:left;
 }
 
-#lisaysform{ border: 0px solid black; max-width:100%;
+#lisaysform{ border: 0px solid black; width:100%; max-width:100%;
 }
 
-#lomakkeet{ max-width:30%;
+#lomakkeet{ width:90%; max-width:90%;
 }
 
 #txtHint{ background-color:white; font-size:1em;}
