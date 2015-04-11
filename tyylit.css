@@ -89,3 +89,5 @@ border: 1px solid #999; font-size: 13px; padding: 4px;
 
 #lomakkeet{ max-width:30%;
 }
+
+#txtHint{ background-color:white; font-size:1em;}

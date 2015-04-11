@@ -11,7 +11,7 @@ echo <<<NEW
 </table>
 <button type="submit" name='addstock'>Buy</button>
 </form>
-<p>Buy<span id="txtHint"></span></p>
+<span id="txtHint"></span>
 <form method='get' action='' id='myyntiform'>
 Sell
 <table>
