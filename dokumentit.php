@@ -17,8 +17,8 @@
 
 <content>
 <article>
-<a href="http://student.labranet.jamk.fi/~pelju/k15/os/information/harjoitustyo_ohjelmistosuunnittelu.html">LINKKI</a>
-<p>Dokumentointi osoitteesa <a href= "https://github.com/jussiheikkinen/stockdata/wiki"></p>
+<p>Juha peltosen suunnittelu materiaalit<a href="http://student.labranet.jamk.fi/~pelju/k15/os/information/harjoitustyo_ohjelmistosuunnittelu.html">LINKKI</a></p>
+<p>Dokumentointi osoitteessa <a href= "https://github.com/jussiheikkinen/stockdata/wiki">LINKKI</a></p>
 </article>
 </content>
 </body>
