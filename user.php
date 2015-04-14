@@ -42,8 +42,9 @@ function showHint(str) {
 <content>
 <article id="kayttaja">
 <form action='<?php echo $_SERVER['PHP_SELF']?>' method='get'>
-<button type="submit" name="logout" >logout</button>
-<button type="submit" name="uusi" >uusi</button>
+<button type="submit" name="logout" >Logout</button>
+<button type="submit" name="settings" >Settings</button>
+<!--<button type="submit" name="uusi" >uusi</button>-->
 <button type="submit" name='deleteUser'>Remove user</button>
 </form>
 
@@ -61,6 +62,11 @@ lisaaOsake($oletusSalkku->salkkuID);
 
 if(isset($_GET['sellstock'])){
 myyOsake();
+}
+
+if(isset($_GET['settings'])){
+$kayttaja = new kayttaja;
+$kayttaja->updateUser($_SESSION['userName']);
 }
 
 //LOGOUT

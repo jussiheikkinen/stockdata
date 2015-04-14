@@ -20,7 +20,7 @@ Sell
 </table>
 <button type="submit" name='sellstock'>Sell</button>
 </form>
-<div>
+</div>
 NEW;
 }
 //Osakkeen lisääminen salkkuun
@@ -54,26 +54,31 @@ function lisaaOsake($salkku){
 
   function myyOsake(){
     require ("/var/www/db-init.php");
-/*
-    $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi
+
+    $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi, Tapahtuma.TapahtumaOsake
     FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
     INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
     WHERE KayttajaNimi = ? AND OsakeNimi = ?");
-    $stmt->execute(array($_SESSION['userName'] ,$_GET['stock1']));
+    $stmt->execute(array($_SESSION['userName'], $_GET['stock1']));
     $osake = $stmt->fetch(PDO::FETCH_OBJ);
 
     $lkm = ($osake->TapahtumaLkm - $_GET['amount1']);
+    if ($lkm <= 0){
+      $stmt = $db->prepare("DELETE Tapahtuma.* FROM Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
+        INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
+        $stmt->execute(array($_SESSION['userName'], $osake->TapahtumaOsake));
+    }else{
+          $stmt = $db->prepare("UPDATE Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
+          INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja SET Tapahtuma.TapahtumaLkm = ?
+          WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
+          $stmt->execute(array($lkm, $_SESSION['userName'], $osake->TapahtumaOsake));
 
-    $stmt = $db->prepare("UPDATE Tapahtuma SET TapahtumaLkm = ? FROM Tapahtuma
-    INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
-  	INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
-  	INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ? AND OsakeNimi = ?");
-    $stmt->execute(array($lkm, $_SESSION['userName'], $_GET['stock1']));
-
-    if ($affected_rows = $stmt->rowCount()){
-       echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
-    } else {
-    exit(); */
-    }
+      if ($affected_rows = $stmt->rowCount()){
+        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
+      } else {
+      exit();
+      }
+}
+}
 
 ?>
