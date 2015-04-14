@@ -37,20 +37,42 @@ function lisaaOsake($salkku){
   $stmt->execute(array($b));
   $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
 
-  $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, 1)");
-  $stmt->execute(array($tunnus));
-
   $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
   $stmt->execute(array($tunnus));
   $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
-  $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
-  $stmt->execute(array(':f1' => $lkm, ':f2' => $ostohinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
-  if ($affected_rows = $stmt->rowCount()){
-     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
-  } else {
+  if ($osakeid->OsakeId > 0){ // jos ei ole 0 eli indeksi ei 0 niin niin on jo taulussa ja yhdistetään siihen
+        $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi, Tapahtuma.TapahtumaOsake, Osake.OsakeId
+        FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
+        INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
+        WHERE KayttajaNimi = ? AND OsakeNimi = ?");
+        $stmt->execute(array($_SESSION['userName'], $_GET['stock']));
+        $osake = $stmt->fetch(PDO::FETCH_OBJ);
+
+        $value = ($osake->TapahtumaLkm + $_GET['amount']);
+
+        $stmt = $db->prepare("UPDATE Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
+        INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja SET Tapahtuma.TapahtumaLkm = ?
+        WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
+        $stmt->execute(array($value, $_SESSION['userName'], $osake->TapahtumaOsake));
+
+  }else{ // indeksi on 0 eli lisätään uusi alkio Osake tauluun
+        $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, 1)");
+        $stmt->execute(array($tunnus));
+
+        $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
+        $stmt->execute(array($tunnus));
+        $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
+
+
+        $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
+        $stmt->execute(array(':f1' => $lkm, ':f2' => $ostohinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+        if ($affected_rows = $stmt->rowCount()){
+          echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
+        }else {
   exit();
-  }}
+}}
+}
 
   function myyOsake(){
     require ("/var/www/db-init.php");

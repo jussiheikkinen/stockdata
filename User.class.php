@@ -33,11 +33,13 @@ public function deleteUser($value){
 public function updateUser($value){
 	require ("/var/www/db-init.php");
 
-	$stmt = $db->prepare('DELETE FROM Kayttaja WHERE KayttajaTunnus = :id');
-	$stmt->bindValue(':id', $value);
-	$stmt->execute();
-
 	echo '<META HTTP-EQUIV="Refresh" Content="1; URL=kirjaudu.php">';
+
+	//$stmt = $db->prepare('DELETE FROM Kayttaja WHERE KayttajaTunnus = :id');
+	//$stmt->bindValue(':id', $value);
+	//$stmt->execute();
+
+	//echo '<META HTTP-EQUIV="Refresh" Content="1; URL=kirjaudu.php">';
 }
 
 }
