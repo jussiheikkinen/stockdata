@@ -41,7 +41,7 @@ function lisaaOsake($salkku){
   $stmt->execute(array($tunnus));
   $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
-  if ($osakeid->OsakeId > 0){ // jos ei ole 0 eli indeksi ei 0 niin niin on jo taulussa ja yhdistetään siihen
+  if ($osakeid->OsakeId > 0){ // jos osake on jo Osake taulussa niin ei lisätä sitä uudestaan
         $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi, Tapahtuma.TapahtumaOsake, Osake.OsakeId
         FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
         INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
@@ -49,12 +49,20 @@ function lisaaOsake($salkku){
         $stmt->execute(array($_SESSION['userName'], $_GET['stock']));
         $osake = $stmt->fetch(PDO::FETCH_OBJ);
 
-        $value = ($osake->TapahtumaLkm + $_GET['amount']);
+        if (empty($osake)){ // Osake on jo Osake taulussa (tietokannassa) mutta se ei ole vielä salkussa
+            $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
+            $stmt->execute(array(':f1' => $lkm, ':f2' => $ostohinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+        }
 
-        $stmt = $db->prepare("UPDATE Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
-        INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja SET Tapahtuma.TapahtumaLkm = ?
-        WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
-        $stmt->execute(array($value, $_SESSION['userName'], $osake->TapahtumaOsake));
+        else{ //Osake on jo Osaketaulussa sekä salkussa joten osto yhdistetään salkussa olevaan tapahtumaan
+
+            $value = ($osake->TapahtumaLkm + $_GET['amount']); // lasketaan osakkeiden uusi määrä
+
+            $stmt = $db->prepare("UPDATE Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
+            INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja SET Tapahtuma.TapahtumaLkm = ?
+            WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
+            $stmt->execute(array($value, $_SESSION['userName'], $osake->TapahtumaOsake));
+        }
 
   }else{ // indeksi on 0 eli lisätään uusi alkio Osake tauluun
         $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, 1)");
@@ -64,13 +72,12 @@ function lisaaOsake($salkku){
         $stmt->execute(array($tunnus));
         $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
-
         $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
         $stmt->execute(array(':f1' => $lkm, ':f2' => $ostohinta, ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
         if ($affected_rows = $stmt->rowCount()){
           echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
         }else {
-  exit();
+        echo 'Something went wrong in newstock line 80' ;
 }}
 }
 
@@ -84,23 +91,26 @@ function lisaaOsake($salkku){
     $stmt->execute(array($_SESSION['userName'], $_GET['stock1']));
     $osake = $stmt->fetch(PDO::FETCH_OBJ);
 
+    if (!empty($osake)){
+
     $lkm = ($osake->TapahtumaLkm - $_GET['amount1']);
+    //$newprice = ($osake->TapahtumaHinta + ]); //uuden ostohiinnan lasku mutta ei jaksa toteuttaa
+
     if ($lkm <= 0){
       $stmt = $db->prepare("DELETE Tapahtuma.* FROM Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
         INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
         $stmt->execute(array($_SESSION['userName'], $osake->TapahtumaOsake));
-    }else{
+      }else{
           $stmt = $db->prepare("UPDATE Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
           INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja SET Tapahtuma.TapahtumaLkm = ?
           WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
           $stmt->execute(array($lkm, $_SESSION['userName'], $osake->TapahtumaOsake));
-
-      if ($affected_rows = $stmt->rowCount()){
-        echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
-      } else {
-      exit();
-      }
 }
 }
-
+if ($affected_rows = $stmt->rowCount()){
+    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
+    }else {
+    echo 'Check details';
+}
+}
 ?>

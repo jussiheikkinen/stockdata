@@ -33,7 +33,7 @@ setcookie("hinta", (double)$_GET['hinta'], time()+86400);
 <pre>
 <?php
 $homepage = file_get_contents("https://www.nordnet.fi/mux/web/marknaden/kurslista/aktier.html?marknad=Finland&lista=1_1&large=on&mid=on&small=on&sektor=0&subtyp=price&sortera=aktie&sorteringsordning=stigande");
-
+echo '<h1>OMX Helsinki</h1><p>Delay 15min</p>';
 echo '<table id="omasalkku"><tr><th>Name</th><th>Last</th><th>Change</th><th>%</th><th>Highest</th><th>Lowest</th><th>Volume</th><th>Currency</th></tr>';
    //if (preg_match_all('/underline.>[A-Za-ö\s<\/>0-9,="%]+EUR/',$homepage , $matches)){
    if (preg_match_all('/[A-Z]+[A-ZÅÄÖa-zåöä\s<\/>0-9,.="%-]+EUR/',$homepage , $matches)){
@@ -98,31 +98,63 @@ echo "</table>";
 NEW;
 
 if (isset($_GET["addstock"])){
-require_once 'Salkku.class.php';
-require ("/var/www/db-init.php");
-$a = $oletusSalkku->salkkuID;
-$b =  $_SESSION['userName'];
-$lkm = $_GET['amount'];
+  require_once 'Salkku.class.php';
+  require ("/var/www/db-init.php");
+  $a = $oletusSalkku->salkkuID;
+  $b =  $_SESSION['userName'];
+  $lkm = $_GET['amount'];
 
-$stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
-$stmt->execute(array($b));
-$salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
+  $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
+  $stmt->execute(array($b));
+  $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
 
-$stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, 2)");
-$stmt->execute(array($_COOKIE['osake']));
+  $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
+  $stmt->execute(array($_COOKIE['osake']));
+  $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
 
-$stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
-$stmt->execute(array($_COOKIE['osake']));
-$osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
+  if ($osakeid->OsakeId > 0){ // jos osake on jo Osake taulussa niin ei lisätä sitä uudestaan
+        $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi, Tapahtuma.TapahtumaOsake, Osake.OsakeId
+        FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
+        INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
+        WHERE KayttajaNimi = ? AND OsakeNimi = ?");
+        $stmt->execute(array($_SESSION['userName'], $_COOKIE['osake']));
+        $osake = $stmt->fetch(PDO::FETCH_OBJ);
 
-$stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
-$stmt->execute(array(':f1' => $lkm, ':f2' => $_COOKIE['hinta'], ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+        if (empty($osake)){ // Osake on jo Osake taulussa (tietokannassa) mutta se ei ole vielä salkussa
+            $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
+            $stmt->execute(array(':f1' => $lkm, ':f2' => $_COOKIE['hinta'], ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
 
-if ($affected_rows = $stmt->rowCount()){
-   echo 'Adding to portfolio succeed';
-}else {
-exit();
-}}
+        }else{ //Osake on jo Osaketaulussa sekä salkussa joten osto yhdistetään salkussa olevaan tapahtumaan
+
+            $value = ($osake->TapahtumaLkm + $_GET['amount']); // lasketaan osakkeiden uusi määrä
+
+            $stmt = $db->prepare("UPDATE Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
+            INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja SET Tapahtuma.TapahtumaLkm = ?
+            WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
+            $stmt->execute(array($value, $_SESSION['userName'], $osake->TapahtumaOsake));
+        }
+
+        }else{ // indeksi on 0 eli lisätään uusi alkio Osake tauluun
+          $stmt = $db->prepare("INSERT INTO Osake (OsakeNimi, OsakeTiedot) VALUES (?, 2)");
+          $stmt->execute(array($_COOKIE['osake']));
+
+            $stmt = $db->prepare("SELECT OsakeId FROM Osake WHERE OsakeNimi =?");
+            $stmt->execute(array($_COOKIE['osake']));
+            $osakeid =  $stmt->fetch(PDO::FETCH_OBJ);
+
+            $stmt = $db->prepare("INSERT INTO Tapahtuma (TapahtumaLkm, TapahtumaHinta, TapahtumaSalkku, TapahtumaOsake) VALUES( :f1,:f2,:f3,:f4)");
+            $stmt->execute(array(':f1' => $lkm, ':f2' => $_COOKIE['hinta'], ':f3' => $salkkuid->SalkkuId, ':f4' => $osakeid->OsakeId));
+            }
+
+        if ($affected_rows = $stmt->rowCount()){
+            echo 'Adding to portfolio succeed';
+            }else {
+            echo 'Something went wrong in newstock line 80' ;
+      }
+
+unset($_COOKIE['hinta']);
+unset($_COOKIE['osake']);
+}
 ?>
 </article>
 
