@@ -46,6 +46,7 @@ function haeData($symbol, &$error_message) {
 
 function haeHinta($symbol){
 $key = 'a';//a0 = ask l1=last price
+if (strlen($symbol) > 5){return array(-1);} //pituus yli 5 merkkiä eli ei voi löytyä Yahoo apista
 $static = '&e=.csv';
 $url = "http://finance.yahoo.com/d/quotes.csv?s=" . $symbol . "&f=" . $key . $static;
 $fp = @fopen($url, "r");

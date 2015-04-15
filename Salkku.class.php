@@ -53,8 +53,8 @@ $stmt->execute(array($kayttaja));
 echo '<h3>' .  $this->salkkuID .'<h3>';
 echo '<table id="omasalkku"><tr><th>time</th><th>name</th><th>avg-price</th><th>amount</th><th>price</th><th>total</th><th>profit</th><th>currency</th></tr>';
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-$kurssi = haeHinta($row['OsakeNimi']);
-if ($kurssi[0] == 0 || $kurssi[0] == "N/A" || $kurssi[0] == NULL ){
+$kurssi = haeHinta($row['OsakeNimi']); //haeHinta funtio functions.php:ssa
+if ($kurssi[0] == "N/A" || $kurssi[0] == -1 ){ //Jos osaketta ei ole yahoo apissa tai sille ei ole arvoa niin käytetään ostohintaa
 	$kurssi[0] = $row['TapahtumaHinta'];
 }
 $hinta = ($row['TapahtumaLkm'] * $row['TapahtumaHinta']);
@@ -73,7 +73,7 @@ NAPPI;
 }
 //<button type='submit' name='uusiOsake'>add</button>
 
-public function chart(){
+public function chart(){  //haetaan piecharttiin taulukko jossa on hinta ja osakkeen nimi
 $kayttaja = $_SESSION['userName'];
 require ("/var/www/db-init.php");
 $stmt = $db->prepare('SELECT (Tapahtuma.TapahtumaLkm * Tapahtuma.TapahtumaHinta) AS Arvo, Osake.OsakeNimi FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeID
