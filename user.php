@@ -65,8 +65,21 @@ myyOsake();
 }
 
 if(isset($_GET['settings'])){
-$kayttaja = new kayttaja;
-$kayttaja->updateUser($_SESSION['userName']);
+//$kayttaja = new kayttaja;
+//$kayttaja->updateUser($_SESSION['userName']);
+echo <<<LOMAKE
+<div id="lomakkeet">
+<form method='get' action='' id='lisaysform'>
+<table>
+<p>Change user data</p>
+<tr><td>Name</td><td><input type="text" name="vaihdaetu"></td></tr>
+<tr><td>Lastname</td><td><input type="text" name="vaihdasuku"></td></tr>
+<tr><td>Nick</td><td><input type="text" name="vaihdanick"></td></tr>
+<tr><td>Password</td><td><input type="text" name="vaihdasala"></td></tr>
+</table>
+<button type="submit" name='vaihdatallenna'>Save</button>
+</form>
+LOMAKE;
 }
 
 //LOGOUT

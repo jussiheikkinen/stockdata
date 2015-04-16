@@ -27,7 +27,11 @@ public function deleteUser($value){
 	$stmt->bindValue(':id', $value);
 	$stmt->execute();
 
-	echo '<META HTTP-EQUIV="Refresh" Content="1; URL=kirjaudu.php">';
+if ($affected_rows = $stmt->rowCount()){
+		echo '<META HTTP-EQUIV="Refresh" Content="1; URL=kirjaudu.php">';
+		}else {
+			echo 'Something went wrong';
+}
 }
 
 public function updateUser($value){

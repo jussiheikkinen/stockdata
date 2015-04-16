@@ -5,6 +5,7 @@ require_once ("/var/www/db-init.php");
 if(isset($_POST['submit'])) {
 $username = $_POST["userName"];
 $password = $_POST["password"];
+$message = '';
 // varmistetaan että mysql injektio ei ole mahdollista
 $stmt = $db->prepare("SELECT KayttajaSalasana FROM Kayttaja WHERE kayttajaNimi = :username");
 $stmt->bindValue(':username', $username);
@@ -17,7 +18,7 @@ if ($user->KayttajaSalasana == crypt($password, $user->KayttajaSalasana)) {
   $_SESSION['userName'] = $_POST['userName'];
   header('Location:' . dirname($_SERVER['PHP_SELF']) . '/' . 'user.php');
   exit;
-} else{ echo 'Wrong input';
+} else{ $message = 'Wrong input';
 }
 }
 ?>
@@ -30,12 +31,14 @@ if ($user->KayttajaSalasana == crypt($password, $user->KayttajaSalasana)) {
 
 <body style='background-color: transparent; padding-top:15%; padding-bottom:15%; '>
 <form method="post" action="" id='login'>
+  <p><?php echo $message?></p>
   <input type="text" name="userName" placeholder="username" autofocus>
   <br><br>
   <input type="password" name="password" placeholder="password"><br><br>
   <button type="submit" name="submit" style='width:15em;'>Sign In</button><br><br>
   Not a member?<a href='newUser.php'>Join</a>
 </form>
+
 
 </body>
 </html>
