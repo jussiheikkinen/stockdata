@@ -24,7 +24,7 @@ public function laskeArvo($kayttaja){
 	$stmt = $db->prepare('SELECT (Tapahtuma.TapahtumaLkm * Tapahtuma.TapahtumaHinta) AS Arvo, Osake.OsakeNimi FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
 	INNER JOIN Tiedot ON Osake.OsakeTiedot = Tiedot.TiedotId
 	INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
-	INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ?;');
+	INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaTunnus = ?;');
 	$stmt->execute(array($kayttaja));
 	while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 	$array[] = $row['Arvo'];
@@ -47,7 +47,7 @@ $stmt = $db->prepare('SELECT Tapahtuma.TapahtumaAika,Tapahtuma.TapahtumaLkm,Tapa
 FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
 INNER JOIN Tiedot ON Osake.OsakeTiedot = Tiedot.TiedotId
 INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
-INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ?;
+INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaTunnus = ?;
 ');
 $stmt->execute(array($kayttaja));
 echo '<h3>' .  $this->salkkuID .'<h3>';
@@ -79,7 +79,7 @@ require ("/var/www/db-init.php");
 $stmt = $db->prepare('SELECT (Tapahtuma.TapahtumaLkm * Tapahtuma.TapahtumaHinta) AS Arvo, Osake.OsakeNimi FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeID
 INNER JOIN Tiedot ON Osake.OsakeTiedot = Tiedot.TiedotId
 INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
-INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ?;');
+INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaTunnus = ?;');
 $stmt->execute(array($kayttaja));
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 $this->osakkeet[] = array($row['OsakeNimi'], $row['Arvo']);

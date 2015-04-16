@@ -33,7 +33,7 @@ function lisaaOsake($salkku){
   $ostohinta = $_GET['price'];
   $lkm = $_GET['amount'];
 
-  $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaNimi =?");
+  $stmt = $db->prepare("SELECT SalkkuId FROM Salkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja WHERE KayttajaTunnus =?");
   $stmt->execute(array($b));
   $salkkuid = $stmt->fetch(PDO::FETCH_OBJ);
 
@@ -45,7 +45,7 @@ function lisaaOsake($salkku){
         $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi, Tapahtuma.TapahtumaOsake, Osake.OsakeId
         FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
         INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
-        WHERE KayttajaNimi = ? AND OsakeNimi = ?");
+        WHERE KayttajaTunnus = ? AND OsakeNimi = ?");
         $stmt->execute(array($_SESSION['userName'], $_GET['stock']));
         $osake = $stmt->fetch(PDO::FETCH_OBJ);
 
@@ -60,7 +60,7 @@ function lisaaOsake($salkku){
 
             $stmt = $db->prepare("UPDATE Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
             INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja SET Tapahtuma.TapahtumaLkm = ?
-            WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
+            WHERE KayttajaTunnus = ? AND TapahtumaOsake = ?");
             $stmt->execute(array($value, $_SESSION['userName'], $osake->TapahtumaOsake));
         }
 
@@ -87,7 +87,7 @@ function lisaaOsake($salkku){
     $stmt = $db->prepare("SELECT Tapahtuma.TapahtumaLkm,Tapahtuma.TapahtumaHinta,Osake.OsakeNimi, Tapahtuma.TapahtumaOsake
     FROM Tapahtuma INNER JOIN Osake ON Tapahtuma.TapahtumaOsake = Osake.OsakeId
     INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku INNER JOIN Kayttaja ON KayttajaId = SalkkuKayttaja
-    WHERE KayttajaNimi = ? AND OsakeNimi = ?");
+    WHERE KayttajaTunnus = ? AND OsakeNimi = ?");
     $stmt->execute(array($_SESSION['userName'], $_GET['stock1']));
     $osake = $stmt->fetch(PDO::FETCH_OBJ);
 
@@ -98,12 +98,12 @@ function lisaaOsake($salkku){
 
     if ($lkm <= 0){
       $stmt = $db->prepare("DELETE Tapahtuma.* FROM Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
-        INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
+        INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja WHERE KayttajaTunnus = ? AND TapahtumaOsake = ?");
         $stmt->execute(array($_SESSION['userName'], $osake->TapahtumaOsake));
       }else{
           $stmt = $db->prepare("UPDATE Tapahtuma INNER JOIN Salkku ON Salkku.SalkkuId = TapahtumaSalkku
           INNER JOIN Kayttaja On KayttajaId = SalkkuKayttaja SET Tapahtuma.TapahtumaLkm = ?
-          WHERE KayttajaNimi = ? AND TapahtumaOsake = ?");
+          WHERE KayttajaTunnus = ? AND TapahtumaOsake = ?");
           $stmt->execute(array($lkm, $_SESSION['userName'], $osake->TapahtumaOsake));
 }
 }

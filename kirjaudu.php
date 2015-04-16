@@ -7,7 +7,7 @@ $username = $_POST["userName"];
 $password = $_POST["password"];
 $message = '';
 // varmistetaan että mysql injektio ei ole mahdollista
-$stmt = $db->prepare("SELECT KayttajaSalasana FROM Kayttaja WHERE kayttajaNimi = :username");
+$stmt = $db->prepare("SELECT KayttajaSalasana FROM Kayttaja WHERE kayttajaTunnus = :username");
 $stmt->bindValue(':username', $username);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_OBJ);

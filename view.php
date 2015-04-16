@@ -28,15 +28,15 @@ exit;}
 <?php
 require ("/var/www/db-init.php");
 
-echo '<table id="omasalkku"><tr><th>Stock</th><th>Amount</th><th>Avg price</th><th>Value</th><th>Currency</th><th>Market</th><th>Timestamp</th></tr>';
+echo '<table id="omasalkku"><tr><th>Nick</th><th>Stock</th><th>Amount</th><th>Avg price</th><th>Value</th><th>Currency</th><th>Market</th><th>Timestamp</th></tr>';
 
-    $stmt = $db->prepare('SELECT * FROM Nakyma WHERE KayttajaTunnus =?');
+    $stmt = $db->prepare('SELECT * FROM Nakyma WHERE KayttajaTunnus = ?');
     $stmt->execute(array($_SESSION['userName']));
     while ($nakyma = $stmt->fetch(PDO::FETCH_OBJ)){
 
 echo <<<VIEW
      <tr>
-     <td>$nakyma->OsakeNimi</td><td>$nakyma->TapahtumaLkm</td><td>$nakyma->TapahtumaHinta</td><td>$nakyma->Arvo</td>
+     <td>$nakyma->KayttajaTunnus</td><td>$nakyma->OsakeNimi</td><td>$nakyma->TapahtumaLkm</td><td>$nakyma->TapahtumaHinta</td><td>$nakyma->Arvo</td>
      <td>$nakyma->TiedotValuutta</td><td>$nakyma->TiedotMarkkina</td><td>$nakyma->TapahtumaAika</td>
      </tr>
 VIEW;

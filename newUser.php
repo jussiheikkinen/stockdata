@@ -28,8 +28,8 @@ $hash = crypt($_POST['salasana']);
 
 // let the salt be automatically generated näköjään $6$ eli SHA-512 salt 18 merkkiä pitkä = turvallinen
 // https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/
-$stmt = $db->prepare("INSERT INTO Kayttaja (KayttajaTunnus, KayttajaNimi, KayttajaSukunimi, KayttajaSalasana) VALUES( ?, ?, ?, ?)");
-$stmt->execute(array($tunnus, $nimi, $snimi, $hash));
+$stmt = $db->prepare("INSERT INTO Kayttaja (KayttajaNimi, KayttajaSukunimi, KayttajaTunnus, KayttajaSalasana) VALUES( ?, ?, ?, ?)");
+$stmt->execute(array($nimi, $snimi, $tunnus, $hash));
 
 //Tehdään salkku
 $stmt = $db->prepare("SELECT KayttajaId FROM Kayttaja WHERE KayttajaTunnus =?");
