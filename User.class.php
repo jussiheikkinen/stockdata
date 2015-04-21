@@ -36,16 +36,16 @@ if ($affected_rows = $stmt->rowCount()){
 
 public function updateUser($value){
 	require ("/var/www/db-init.php");
+	$hash = crypt($value);
+	$stmt = $db->prepare('UPDATE Kayttaja SET KayttajaSalasana = ? WHERE KayttajaTunnus = ?');
+	$stmt->execute(array($hash ,$_SESSION['userName']));
 
-	echo '<META HTTP-EQUIV="Refresh" Content="1; URL=kirjaudu.php">';
-
-	//$stmt = $db->prepare('DELETE FROM Kayttaja WHERE KayttajaTunnus = :id');
-	//$stmt->bindValue(':id', $value);
-	//$stmt->execute();
-
-	//echo '<META HTTP-EQUIV="Refresh" Content="1; URL=kirjaudu.php">';
+	if ($affected_rows = $stmt->rowCount()){
+			echo 'Succes'.'<META HTTP-EQUIV="Refresh" Content="0; URL=user.php">';
+			}else {
+			echo 'Something went wrong';
 }
-
+}
 }
 
 ?>

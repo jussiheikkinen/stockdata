@@ -27,7 +27,7 @@ exit;}
 
 <?php
 require ("/var/www/db-init.php");
-
+//echo '<h2></h2>';
 echo '<table id="omasalkku"><tr><th>Nick</th><th>Stock</th><th>Amount</th><th>Avg price</th><th>Value</th><th>Currency</th><th>Market</th><th>Timestamp</th></tr>';
 
     $stmt = $db->prepare('SELECT * FROM Nakyma WHERE KayttajaTunnus = ?');
